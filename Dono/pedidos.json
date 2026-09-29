@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Tosh-TechMSE4RNU9-Q5PW7MT79",
+    "email": "toshblackout664@gmail.com",
+    "plano": "Iniciante",
+    "valor": 1,
+    "status": "pendente",
+    "data": "04/08/2026 01:00:52"
+  },
+  {
+    "id": "Tosh-TechMSGLTH5Q-LGV2J2KDB",
+    "email": "toshblackout664@gmail.com",
+    "plano": "Aprendiz",
+    "valor": 2,
+    "status": "pendente",
+    "data": "05/08/2026 18:33:43"
+  },
+  {
+    "id": "Tosh-TechMSJ9764V-4U5XB3AP5",
+    "email": "toshblackout664@gmail.com",
+    "plano": "Iniciante",
+    "valor": 1,
+    "status": "pendente",
+    "data": "07/08/2026 15:03:46"
+  }
+]

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja de Temas - Tosh Tech</title>
+  <!-- ✅ TEMA PADRÃO CARREGADO INICIALMENTE -->
+  <link rel="stylesheet" href="/assets/temas/ToshTech/escolher-tema.css">
+  <!-- ✅ LINK DINÂMICO COM ID CORRETO -->
+  <link id="temaEstilo" rel="stylesheet" href="">
+
+  <script>
+    // ➪ CARREGA E APLICA O TEMA SALVO
+    async function carregarTemaGlobal() {
+      try {
+        const res = await fetch('/tema-atual');
+        if (!res.ok) throw new Error('Falha ao buscar tema');
+        
+        const dados = await res.json();
+        if (dados.sucesso && dados.tema) {
+          const linkTema = document.getElementById('temaEstilo');
+          // ✅ CAMINHO CORRETO PARA O CSS DO TEMA
+          linkTema.href = `/assets/temas/${dados.tema}/escolher-tema.css`;
+          console.log(`✅ Tema carregado: ${dados.tema}`);
+        }
+      } catch (e) {
+        console.warn('⚠️ Usando tema padrão ToshTech');
+        // ✅ GARANTE O TEMA PADRÃO SE DER ERRO
+        const linkTema = document.getElementById('temaEstilo');
+        linkTema.href = '/assets/temas/ToshTech/escolher-tema.css';
+      }
+    }
+
+    // ✅ EXECUTA LOGO AO CARREGAR
+    document.addEventListener('DOMContentLoaded', carregarTemaGlobal);
+  </script>
+</head>
+<body>
+  <div class="aviso-fixo" id="avisoSalvo"></div>
+
+  <div class="fundo-confirm" id="fundoConfirm">
+    <div class="caixa-confirm">
+      <p id="textoConfirm"></p>
+      <div class="botoes">
+        <button class="btn cancelar" id="btnCancelar">Cancelar</button>
+        <button class="btn confirmar" id="btnConfirmar">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cabecalho">
+      <img src="/logo" alt="Logo ToshTech" class="logo">
+      <h1>Loja de Temas</h1>
+      <div class="saldo-topo" id="mostraSaldo">Saldo: --- TechCoins</div>
+    </div>
+    <div class="grid" id="lista">
+      <p class="mensagem">Carregando temas...</p>
+    </div>
+    <a href="/dashboard" class="voltar">← Voltar ao Painel</a>
+  </div>
+
+  <!-- ✅ CAMINHO CORRETO DO JS -->
+  <script src="/js/escolher-tema.js"></script>
+</body>
+</html>

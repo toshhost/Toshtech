@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title id="titulo-pagina"></title>
+<link rel="icon" type="image/jpeg" id="icone-site">
+<link rel="stylesheet" href="assets/temas/ToshTech/login.css">
+<script>
+async function carregarConfig(){
+try{
+const res = await fetch('/api/config');
+const dados = await res.json();
+// Ajusta os textos se os elementos existirem na página
+if(document.getElementById('titulo-pagina')) document.getElementById('titulo-pagina').textContent = dados.NomeApi || 'TOSH TECH';
+if(document.getElementById('icone-site')) document.getElementById('icone-site').href = '/logo';
+if(document.getElementById('nomeSistema')) document.getElementById('nomeSistema').textContent = dados.NomeApi || 'TOSH TECH';
+if(document.getElementById('creditosSistema')) document.getElementById('creditosSistema').innerHTML = `Criado por <span>${dados.Criador || 'Tosh'}</span> • Versão <span>2.0</span>`;
+}catch(e){
+// Valores padrão se houver erro
+if(document.getElementById('titulo-pagina')) document.getElementById('titulo-pagina').textContent = 'TOSH TECH';
+if(document.getElementById('icone-site')) document.getElementById('icone-site').href = '/logo';
+if(document.getElementById('nomeSistema')) document.getElementById('nomeSistema').textContent = 'TOSH TECH';
+if(document.getElementById('creditosSistema')) document.getElementById('creditosSistema').innerHTML = 'Criado por <span>Tosh</span> • Versão <span>2.0</span>';
+console.warn('⚠️ Não foi possível carregar configurações:', e.message);
+}}
+carregarConfig();
+</script>
+</head>
+<body>
+<div id="fundoParticulas"></div>
+<div class="container">
+<div class="logo-caixa">
+<div class="aureola"></div>
+<div class="asas"><div class="asa asa-esq"></div><div class="asa asa-dir"></div></div>
+<img src="/logo" alt="Logo TOSH TECH" class="logo-img">
+</div>
+<h1 class="prata" id="nomeSistema"></h1>
+<div class="creditos" id="creditosSistema"></div>
+<hr class="linha-prata">
+<div class="caixa">
+<div class="abas">
+<div class="aba ativa" data-aba="login" onclick="mudarAba('login')">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Acesso
+</div>
+<div class="aba" data-aba="registro" onclick="mudarAba('registro')">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Registro
+</div>
+</div>
+<form id="formLogin" onsubmit="event.preventDefault();fazerLogin();">
+<div class="input-caixa">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+<input type="email" id="emailLogin" placeholder="Endereço de e-mail" autocomplete="email" required maxlength="100">
+</div>
+<div class="input-caixa">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+<input type="password" id="senhaLogin" placeholder="Senha de acesso" autocomplete="current-password" required minlength="4" maxlength="50">
+<svg class="btn-visu" viewBox="0 0 24 24" onclick="alternarVisu(this,'senhaLogin')"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+</div>
+<div class="captcha-caixa">
+<div class="captcha-tela" id="captchaTexto"></div>
+<button type="button" class="btn-refresh" onclick="gerarCaptcha()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
+</div>
+<div class="input-caixa">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14H7v-2h3v2zm0-4H7V9h3v4zm4 4h-2v-2h2v2zm0-4h-2V9h2v4zm4 4h-2v-6h2v6zm0-8h-2V5h2v4z"/></svg>
+<input type="text" id="respCaptchaLogin" placeholder="Digite o código de segurança" autocomplete="off" required maxlength="5">
+</div>
+<button type="submit" id="btnLogin">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>Entrar no Sistema
+</button>
+</form>
+<form id="formRegistro" class="oculto" onsubmit="event.preventDefault();fazerRegistro();">
+<div class="input-caixa">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+<input type="text" id="nomeCad" placeholder="Nome completo" autocomplete="name" required minlength="3" maxlength="80">
+</div>
+<div class="input-caixa">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+<input type="email" id="emailCad" placeholder="Endereço de e-mail" autocomplete="email" required maxlength="100">
+</div>
+<div class="input-caixa" id="caixaSenha1">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+<input type="password" id="senhaCad" placeholder="Senha de acesso (mín. 4 caracteres)" autocomplete="new-password" required minlength="4" maxlength="50">
+<svg class="btn-visu" viewBox="0 0 24 24" onclick="alternarVisu(this,'senhaCad')"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+</div>
+<div class="input-caixa" id="caixaSenha2">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+<input type="password" id="senhaConfirma" placeholder="Confirmar senha" autocomplete="new-password" required minlength="4" maxlength="50">
+<svg class="status-senha valido" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+<svg class="status-senha invalido" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+<svg class="btn-visu" viewBox="0 0 24 24" onclick="alternarVisu(this,'senhaConfirma')"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+</div>
+<div class="captcha-caixa">
+<div class="captcha-tela" id="captchaTextoCad"></div>
+<button type="button" class="btn-refresh" onclick="gerarCaptchaCad()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
+</div>
+<div class="input-caixa">
+<svg class="input-icone" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14H7v-2h3v2zm0-4H7V9h3v4zm4 4h-2v-2h2v2zm0-4h-2V9h2v4zm4 4h-2v-6h2v6zm0-8h-2V5h2v4z"/></svg>
+<input type="text" id="respCaptchaCad" placeholder="Digite o código de segurança" autocomplete="off" required maxlength="5">
+</div>
+<div class="politica-caixa" style="margin:15px 0;padding:12px;border-radius:8px;border:1px solid #c0c0c040;">
+<label style="display:flex;align-items:center;gap:8px;color:#e0e0e0;font-size:14px;cursor:pointer;">
+<input type="checkbox" name="aceitou_politica" required style="width:16px;height:16px;">Li e aceito a <a href="/politica-privacidade" target="_blank" style="color:#c0c0c0;font-weight:bold;text-decoration:underline;">Política de Privacidade</a>
+</label>
+</div>
+<button type="submit" id="btnCadastro">
+<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Criar Conta
+</button>
+</form>
+<div id="msg" class="alerta oculto"></div>
+</div>
+</div>
+<script src="js/login.js"></script>
+</body>
+</html>

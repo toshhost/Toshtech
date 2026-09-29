@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Desenvolvedor — Tosh Tech</title>
+    <link rel="stylesheet" href="/assets/temas/ToshTech/desenvolvedores.css">
+</head>
+<body>
+
+<h1>📚 GUIA COMPLETO DO DESENVOLVEDOR</h1>
+<p class="subtitulo">Tudo sobre Termux, Node.js, MT Manager, histórias das linguagens, exemplos de código e regras de operadores por linguagem — explicado de forma simples, completa e profissional.</p>
+
+<div class="linha"></div>
+
+<button class="botao-voltar" onclick="history.back()">VOLTAR</button>
+
+<div class="container">
+
+<!-- PARTE 1 — LINKS OFICIAIS DE DOWNLOAD -->
+<h2>📲 PARTE 1 — LINKS OFICIAIS DE DOWNLOAD</h2>
+
+<div class="card">
+    <h3>📱 Termux — Oficial e Recomendado</h3>
+    <p>O ambiente Linux completo direto no Android, sem precisar de root.</p>
+    <a href="https://f-droid.org/en/packages/com.termux/" target="_blank" class="link-download">⬇️ Baixar do F-Droid (Recomendado)</a>
+    <a href="https://github.com/termux/termux-app/releases" target="_blank" class="link-download">⬇️ GitHub — Versões Diretas</a>
+    <a href="https://f-droid.org/en/packages/com.termux.api/" target="_blank" class="link-download">📦 Termux:API (Recursos do celular)</a>
+    <div class="aviso">
+        <strong>⚠️ NÃO baixe da Google Play!</strong> A versão lá está <strong>desatualizada desde 2020</strong> (v0.101). Use sempre o F-Droid ou GitHub.
+    </div>
+</div>
+
+<div class="card">
+    <h3>📱 ZeroTermux — Fork com Melhorias</h3>
+    <p>Versão modificada com interface gráfica, X11 e mais recursos pré-configurados.</p>
+    <a href="https://github.com/zerotermux/zerotermux" target="_blank" class="link-download">⬇️ GitHub — ZeroTermux</a>
+</div>
+
+<div class="card">
+    <h3>📂 MT Manager — Gerenciador de Arquivos</h3>
+    <p>O melhor gerenciador de arquivos para Android — dois painéis, editor de código, edita APK direto, sem anúncios.</p>
+    <a href="https://mt2.cn/download/" target="_blank" class="link-download">⬇️ Site Oficial — MT Manager</a>
+    <a href="https://github.com/mt2android" target="_blank" class="link-download">📂 GitHub — MT Manager</a>
+    <p class="nota">Disponível em versões ARM64, ARM32 e x86. Baixe a que combina com seu celular (a maioria é ARM64-v8a).</p>
+</div>
+
+<div class="card">
+    <h3>🟢 Node.js — Site Oficial</h3>
+    <p>JavaScript no servidor — a base de toda a Tosh Tech.</p>
+    <a href="https://nodejs.org/" target="_blank" class="link-download">🌐 nodejs.org — Site Oficial</a>
+    <a href="https://nodejs.org/en/download/package-manager" target="_blank" class="link-download">📦 Instalar via Gerenciador de Pacotes</a>
+</div>
+
+<div class="linha"></div>
+
+<!-- PARTE 2 — VERSÕES DO TERMUX E NODE.JS -->
+<h2>📦 PARTE 2 — VERSÕES E OBJETIVOS</h2>
+
+<div class="card">
+    <h3>📱 Termux — Versões Disponíveis</h3>
+    <table>
+        <tr>
+            <th>Versão</th>
+            <th>Status</th>
+            <th>Objetivo Principal</th>
+            <th>Requisito</th>
+        </tr>
+        <tr>
+            <td><strong>Termux Oficial (F-Droid/GitHub)</strong></td>
+            <td><span class="tag tag-oficial">✅ OFICIAL</span></td>
+            <td>Desenvolvimento, programação, servidores, scripts, CLI. Sem root. <strong>RECOMENDADO</strong></td>
+            <td>Android 7.0+ (arm64-v8a)</td>
+        </tr>
+        <tr>
+            <td><strong>Termux:API</strong></td>
+            <td><span class="tag tag-novo">🔌 COMPLEMENTO</span></td>
+            <td>Acessar recursos do celular — SMS, GPS, câmera, bateria — direto do terminal</td>
+            <td>Termux Oficial instalado</td>
+        </tr>
+        <tr>
+            <td><strong>ZeroTermux</strong></td>
+            <td><span class="tag tag-fork">🔄 FORK</span></td>
+            <td>Interface gráfica (X11), gerenciador de janelas, temas, backups automáticos</td>
+            <td>Android 7.0+</td>
+        </tr>
+        <tr>
+            <td><strong>Termux (Google Play)</strong></td>
+            <td><span class="tag tag-obsoleto">❌ DESATUALIZADO</span></td>
+            <td>— Obsoleta desde 2020 — Não suporta novos pacotes, problemas de permissão</td>
+            <td>NÃO USAR</td>
+        </tr>
+    </table>
+</div>
+
+<div class="card">
+    <h3>🟢 Node.js — Versões e Objetivos</h3>
+    <table>
+        <tr>
+            <th>Versão</th>
+            <th>Tag</th>
+            <th>Objetivo / Quando Usar</th>
+            <th>Comando no Termux</th>
+        </tr>
+        <tr>
+            <td><strong>nodejs-lts</strong> (Long Term Support)</td>
+            <td><span class="tag tag-lts">LTS</span></td>
+            <td>✅ Projetos estáveis, produção, Tosh Tech. Recebe atualizações por <strong>3 anos</strong>. <strong>USE ESTA</strong></td>
+            <td><code>pkg install nodejs-lts</code></td>
+        </tr>
+        <tr>
+            <td><strong>nodejs</strong> (Current)</td>
+            <td><span class="tag tag-current">ATUAL</span></td>
+            <td>🧪 Testar recursos novos, aprendizado. Pode ter mudanças que quebram código. Não para produção.</td>
+            <td><code>pkg install nodejs</code></td>
+        </tr>
+    </table>
+    <div class="destaque">
+        <strong>💡 Dica:</strong> Use o <strong>NVM</strong> para instalar várias versões e trocar quando quiser:
+<pre><code>#➪ Instalar NVM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+source ~/.bashrc
+
+#➪ Comandos úteis
+nvm install --lts          #➪ Instala a LTS (recomendado)
+nvm use --lts              #➪ Ativa a LTS
+nvm list                   #➪ Mostra todas as versões instaladas
+node -v                    #➪ Ver qual está ativa</code></pre>
+    </div>
+</div>
+
+<div class="linha"></div>
+
+<!-- PARTE 3 — MT MANAGER: Archive, Explore, Uso Completo -->
+<h2>📂 PARTE 3 — MT MANAGER: Guia Completo</h2>
+
+<div class="card">
+    <h3>📦 O que é o MT Manager?</h3>
+    <p>É um gerenciador de arquivos profissional para Android com <strong>dois painéis lado a lado</strong>, editor de código com sintaxe colorida, explorador de arquivos compactados, editor de APK e muito mais. Sem anúncios, leve e poderoso.</p>
+</div>
+
+<div class="card">
+    <h3>🗂️ 1 — Archive (Arquivos Compactados)</h3>
+    <p><strong>O que faz:</strong> Abre e edita arquivos <code>.zip</code>, <code>.rar</code>, <code>.7z</code>, <code>.tar</code> e até <strong>dentro de APK</strong> sem precisar extrair tudo primeiro — economiza tempo e espaço.</p>
+    <h4>✅ Como usar:</h4>
+    <ul>
+        <li><strong>Abrir:</strong> Toque no arquivo .zip / .apk → abre direto como uma pasta</li>
+        <li><strong>Editar dentro:</strong> Toque em um arquivo dentro do zip → edita e salva sem extrair nada</li>
+        <li><strong>Adicionar arquivos:</strong> Seleciona no outro painel → copia → cola <strong>direto dentro do zip aberto</strong></li>
+        <li><strong>Excluir:</strong> Toque longo → Excluir → salva automaticamente</li>
+        <li><strong>Extrair tudo:</strong> Toque longo → Extrair → escolhe pasta de destino</li>
+        <li><strong>Criar arquivo compactado:</strong> Seleciona arquivos → botão "Compactar" → escolhe formato (.zip, .7z, etc.)</li>
+    </ul>
+    <div class="sucesso">
+        <strong>💡 Dica única do MT:</strong> Diferente de todos os outros gerenciadores, o MT Manager <strong>não precisa descompactar para editar</strong>. Você altera um .js dentro de um .apk e ele salva direto — sem ocupar espaço extra! 🚀
+    </div>
+</div>
+
+<div class="card">
+    <h3>🔍 2 — Explore (Explorador de Arquivos)</h3>
+    <p><strong>O que é:</strong> Navegação completa pelos arquivos do celular com <strong>dois painéis independentes</strong> lado a lado — a funcionalidade mais poderosa do app.</p>
+    <h4>✅ Como usar:</h4>
+<pre><code>┌──────────────────────────┐  ┌──────────────────────────┐
+│     Painel Esquerdo      │  │     Painel Direito       │
+│  /storage/emulated/0/    │  │  /home/tosh/projetos/    │
+│  📁 ToshTech/            │  │  📁 backup/              │
+│  📄 api_tosh.js          │  │  📄 api_tosh.js.bak      │
+└──────────────────────────┘  └──────────────────────────┘</code></pre>
+    <ul>
+        <li><strong>Navegar:</strong> Toque em pastas para entrar; toque em ".." para voltar</li>
+        <li><strong>Copiar/Mover:</strong> Seleciona no painel esquerdo → cola no direito — arrasta entre painéis também funciona!</li>
+        <li><strong>Selecionar:</strong> Toque longo em 1 arquivo → marca → toca nos outros para adicionar</li>
+        <li><strong>Editar código:</strong> Toque no arquivo .js/.html/.css → Abrir com → Editor de Texto → sintaxe colorida automática!</li>
+        <li><strong>Visualizar mídia:</strong> Toque direto em imagem/vídeo → abre em tela cheia com zoom e gestos</li>
+        <li><strong>Propriedades:</strong> Toque longo → Propriedades → vê tamanho, permissões, data, caminho completo</li>
+        <li><strong>Comparar pastas:</strong> Dois caminhos abertos → botão "Comparar" → vê arquivos diferentes de um lado e do outro</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>🛠️ 3 — Editor de APK</h3>
+    <p><strong>✅ Como usar:</strong></p>
+    <ol>
+        <li>Localize o arquivo <code>.apk</code> no explorador</li>
+        <li>Toque nele → escolha <strong>"Visualizar"</strong> ou <strong>"Editar"</strong></li>
+        <li>Navegue pelas pastas internas: <code>res/</code> (recursos, ícones, textos), <code>AndroidManifest.xml</code> (configurações do app)</li>
+        <li>Edite imagens, ícones, textos ou cores → clique em <strong>Salvar</strong></li>
+        <li>O MT recompila e assina o APK automaticamente</li>
+        <li>Instale a nova versão</li>
+    </ol>
+    <div class="aviso">
+        <strong>⚠️ Sempre faça uma cópia de segurança antes de editar!</strong> Se o APK não instalar mais, restaura o original.
+    </div>
+</div>
+
+<div class="destaque">
+    <strong>🎯 Seu fluxo de trabalho perfeito:</strong><br>
+    1️⃣ <strong>MT Manager</strong> → edita arquivos .js/.html com sintaxe colorida<br>
+    2️⃣ Salva → abre o <strong>Termux</strong> → executa <code>node api_tosh.js</code><br>
+    3️⃣ Tudo no celular — sem precisar de PC nenhum! 🚀
+</div>
+
+<div class="linha"></div>
+
+<!-- PARTE 4 — HISTÓRIAS DAS LINGUAGENS -->
+<h2>🌍 PARTE 4 — História e Origem das Linguagens</h2>
+
+<div class="card linguagem-card">
+    <div class="linguagem-cabecalho">
+        <h3>🐍 Python</h3>
+        <span class="linguagem-ano">→ 1991</span>
+    </div>
+    <p><strong>👤 Criador:</strong> Guido van Rossum — Holanda</p>
+    <p><strong>📖 A História:</strong> No final dos anos 80, Guido trabalhava no CWI. Insatisfeito com linguagens complicadas, criou algo simples e legível nas férias de Natal de 1989. A primeira versão saiu em fevereiro de 1991.</p>
+    <p><strong>🎭 Nome:</strong> Vem de <strong>"Monty Python's Flying Circus"</strong> — programa de comédia britânico. <strong>Nada a ver com cobras!</strong></p>
+    <p><strong>📍 Onde está:</strong> IA, ciência de dados, automação, Google, YouTube, NASA, Netflix.</p>
+    <h4>💻 Exemplo de Código:</h4>
+<pre><code>def saudacao(nome):
+    return f"Olá, {nome}! 🐍"
+
+print(saudacao("Tosh"))</code></pre>
+
+    <h4>📋 Regras de Operadores — Python</h4>
+    <table class="tabela-operadores">
+        <tr><th>Operador</th><th>Tipo</th><th>O que faz</th><th>Exemplo</th><th>Resultado</th></tr>
+        <tr><td class="sinal">**</td><td>Matemático</td><td>Potência</td><td><code>2 ** 3</code></td><td>8</td></tr>
+        <tr><td class="sinal">//</td><td>Matemático</td><td>Divisão inteira (descarta decimal)</td><td><code>17 // 5</code></td><td>3</td></tr>
+        <tr><td class="sinal">%</td><td>Matemático</td><td>Resto da divisão</td><td><code>17 % 5</code></td><td>2</td></tr>
+        <tr><td class="sinal">==</td><td>Comparação</td><td>Valores iguais</td><td><code>5 == 5.0</code></td><td>True</td></tr>
+        <tr><td class="sinal">is</td><td>Comparação</td><td>Mesmo objeto na memória</td><td><code>a is b</code></td><td>True/False</td></tr>
+        <tr><td class="sinal">and</td><td>Lógico</td><td>E — ambas verdadeiras</td><td><code>True and False</code></td><td>False</td></tr>
+        <tr><td class="sinal">or</td><td>Lógico</td><td>OU — uma basta</td><td><code>True or False</code></td><td>True</td></tr>
+        <tr><td class="sinal">not</td><td>Lógico</td><td>NÃO — inverte</td><td><code>not True</code></td><td>False</td></tr>
+        <tr><td class="sinal">in</td><td>Pertencimento</td><td>Está dentro da lista/texto</td><td><code>"a" in "banana"</code></td><td>True</td></tr>
+        <tr><td class="sinal">is not</td><td>Identidade</td><td>Não é o mesmo objeto</td><td><code>a is not b</code></td><td>True/False</td></tr>
+    </table>
+</div>
+
+<div class="card linguagem-card">
+    <div class="linguagem-cabecalho">
+        <h3>🟨 JavaScript</h3>
+        <span class="linguagem-ano">→ 1995</span>
+    </div>
+    <p><strong>👤 Criador:</strong> Brendan Eich — em apenas <strong>10 DIAS</strong>!</p>
+    <p><strong>📖 A História:</strong> A Netscape precisava de uma linguagem para o navegador. Brendan criou tudo em 10 dias de trabalho intenso. De Mocha → LiveScript → JavaScript — nome só para aproveitar a fama do Java. <strong>Não tem nada a ver com Java!</strong></p>
+    <p><strong>🚀 Revolução:</strong> Em 2009, o Node.js nasceu — e o JS saiu do navegador para rodar no servidor. É a base da Tosh Tech!</p>
+    <p><strong>📍 Onde está:</strong> Toda a web, servidores, apps, celular, robôs.</p>
+    <h4>💻 Exemplo de Código:</h4>
+<pre><code>function saudacao(nome) {
+    return `Olá, ${nome}! 🟨`;
+}
+console.log(saudacao("Tosh"));</code></pre>
+
+    <h4>📋 Regras de Operadores — JavaScript</h4>
+    <table class="tabela-operadores">
+        <tr><th>Operador</th><th>Tipo</th><th>O que faz</th><th>Exemplo</th><th>Resultado</th></tr>
+        <tr><td class="sinal">===</td><td>Comparação</td><td>Estritamente igual (valor + tipo) ✅ USE ESTE</td><td><code>5 === "5"</code></td><td>false</td></tr>
+        <tr><td class="sinal">!==</td><td>Comparação</td><td>Estritamente diferente ✅ USE ESTE</td><td><code>5 !== "5"</code></td><td>true</td></tr>
+        <tr><td class="sinal">==</td><td>Comparação</td><td>Igual (converte tipo) ⚠️ EVITE</td><td><code>5 == "5"</code></td><td>true</td></tr>
+        <tr><td class="sinal">!=</td><td>Comparação</td><td>Diferente (converte tipo) ⚠️ EVITE</td><td><code>5 != "5"</code></td><td>false</td></tr>
+        <tr><td class="sinal">&&</td><td>Lógico</td><td>E — curto-circuito</td><td><code>true && "olá"</code></td><td>"olá"</td></tr>
+        <tr><td class="sinal">||</td><td>Lógico</td><td>OU — retorna primeiro verdadeiro</td><td><code>"" || "padrão"</code></td><td>"padrão"</td></tr>
+        <tr><td class="sinal">??</td><td>Lógico</td><td>Coalescência nula — só nulo/indefinido</td><td><code>"" ?? "padrão"</code></td><td>""</td></tr>
+        <tr><td class="sinal">!</td><td>Lógico</td><td>NÃO — inverte o valor lógico</td><td><code>!"texto"</code></td><td>false</td></tr>
+        <tr><td class="sinal">+=</td><td>Atribuição</td><td>Soma e atribui</td><td><code>x += 5</code></td><td>x = x + 5</td></tr>
+        <tr><td class="sinal">?</td><td>Ternário</td><td>Se verdadeiro : senão</td><td><code>x > 5 ? "maior" : "menor"</code></td><td>condicional</td></tr>
+        <tr><td class="sinal">in</td><td>Objeto</td><td>Existe a chave no objeto</td><td><code>"nome" in usuario</code></td><td>true/false</td></tr>
+        <tr><td class="sinal">typeof</td><td>Tipo</td><td>Verifica o tipo do valor</td><td><code>typeof 42</code></td><td>"number"</td></tr>
+    </table>
+</div>
+
+<div class="card linguagem-card">
+    <div class="linguagem-cabecalho">
+        <h3>🐘 PHP</h3>
+        <span class="linguagem-ano">→ 1995</span>
+    </div>
+    <p><strong>👤 Criador:</strong> Rasmus Lerdorf — Groenlândia/Canadá</p>
+    <p><strong>📖 A História:</strong> Começou como scripts simples para rastrear visitas ao currículo dele. As pessoas pediam mais recursos e virou linguagem completa. Lançado em 1995.</p>
+    <p><strong>🎭 Nome:</strong> De "Personal Home Page" → "PHP: Hypertext Preprocessor" — nome recursivo!</p>
+    <p><strong>📍 Onde está:</strong> WordPress (43% da web!), lojas virtuais, blogs, fóruns, Laravel.</p>
+    <h4>💻 Exemplo de Código:</h4>
+<pre><code>&lt;?php
+function saudacao($nome) {
+    return "Olá, $nome! 🐘";
+}
+echo saudacao("Tosh");
+?&gt;</code></pre>
+
+    <h4>📋 Regras de Operadores — PHP</h4>
+    <table class="tabela-operadores">
+        <tr><th>Operador</th><th>Tipo</th><th>O que faz</th><th>Exemplo</th><th>Resultado</th></tr>
+        <tr><td class="sinal">===</td><td>Comparação</td><td>Idêntico (mesmo valor E tipo)</td><td><code>5 === "5"</code></td><td>false</td></tr>
+        <tr><td class="sinal">!==</td><td>Comparação</td><td>Não idêntico</td><td><code>5 !== "5"</code></td><td>true</td></tr>
+        <tr><td class="sinal">==</td><td>Comparação</td><td>Igual (apenas valor)</td><td><code>5 == "5"</code></td><td>true</td></tr>
+        <tr><td class="sinal">&&</td><td>Lógico</td><td>E (precedência maior)</td><td><code>$a && $b</code></td><td>true/false</td></tr>
+        <tr><td class="sinal">and</td><td>Lógico</td><td>E (precedência menor)</td><td><code>$a and $b</code></td><td>true/false</td></tr>
+        <tr><td class="sinal">||</td><td>Lógico</td><td>OU (precedência maior)</td><td><code>$a || $b</code></td><td>true/false</td></tr>
+        <tr><td class="sinal">or</td><td>Lógico</td><td>OU (precedência menor)</td><td><code>$a or $b</code></td><td>true/false</td></tr>
+        <tr><td class="sinal">xor</td><td>Lógico</td><td>OU exclusivo — apenas um verdadeiro</td><td><code>true xor false</code></td><td>true</td></tr>
+        <tr><td class="sinal">.</td><td>String</td><td>Concatena textos</td><td><code>"Olá" . " " . "Tosh"</code></td><td>"Olá Tosh"</td></tr>
+        <tr><td class="sinal">=.</td><td>Atribuição</td><td>Concatena e atribui</td><td><code>$texto .= " adicionado"</code></td><td>acrescenta</td></tr>
+        <tr><td class="sinal">===</td><td>Array</td><td>Arrays iguais (mesmos pares na mesma ordem)</td><td><code>$a === $b</code></td><td>true/false</td></tr>
+    </table>
+</div>
+
+<div class="card linguagem-card">
+    <div class="linguagem-cabecalho">
+        <h3>📄 HTML</h3>
+        <span class="linguagem-ano">→ 1991</span>
+    </div>
+    <p><strong>👤 Criador:</strong> Tim Berners-Lee — Reino Unido, no CERN</p>
+    <p><strong>📖 A História:</strong> Os cientistas precisavam compartilhar documentos entre instituições. Tim criou o HTML + HTTP + URL em 1990. Liberou publicamente em 1991 — nasceu a <strong>World Wide Web</strong>.</p>
+    <p><strong>⚠️ Importante:</strong> HTML <strong>NÃO é linguagem de programação</strong> — é de <strong>marcação</strong>. Não tem operadores lógicos nem matemáticos. Usa <strong>tags</strong> e <strong>atributos</strong>.</p>
+    <h4>💻 Exemplo de Código:</h4>
+<pre><code>&lt;h1&gt;Olá, Tosh! 📄&lt;/h1&gt;
+&lt;p&gt;Bem-vindo ao HTML — a base da web!&lt;/p&gt;</code></pre>
+
+    <h4>📋 "Operadores" — Regras de Sintaxe do HTML</h4>
+    <table class="tabela-operadores">
+        <tr><th>Símbolo</th><th>Nome</th><th>O que faz</th><th>Exemplo</th></tr>
+        <tr><td class="sinal">&lt; &gt;</td><td>Tag</td><td>Define elemento</td><td><code>&lt;p&gt;texto&lt;/p&gt;</code></td></tr>
+        <tr><td class="sinal">/</td><td>Fechamento</td><td>Fecha a tag</td><td><code>&lt;/p&gt;</code></td></tr>
+        <tr><td class="sinal">=</td><td>Atributo</td><td>Define valor de propriedade</td><td><code>class="destaque"</code></td></tr>
+        <tr><td class="sinal">&lt;!-- --&gt;</td><td>Comentário</td><td>Comentário — não aparece na página</td><td><code>&lt;!-- comentário --&gt;</code></td></tr>
+        <tr><td class="sinal">&amp;;</td><td>Entidade</td><td>Caracteres especiais</td><td><code>&amp;lt; &amp;gt; &amp;amp;</code></td></tr>
+    </table>
+</div>
+
+<div class="card linguagem-card">
+    <div class="linguagem-cabecalho">
+        <h3>🍃 MongoDB</h3>
+        <span class="linguagem-ano">→ 2009</span>
+    </div>
+    <p><strong>👤 Criador:</strong> Equipe da 10gen — Nova York, EUA</p>
+    <p><strong>📖 A História:</strong> Os bancos SQL eram rígidos e complexos. A 10gen criou algo flexível: dados como documentos JSON, sem tabelas fixas. Lançado em 2009.</p>
+    <p><strong>🎭 Nome:</strong> Vem de <strong>"Humongous"</strong> — algo gigante. Projetado para volumes enormes de dados.</p>
+    <p><strong>📍 Por que com Node.js:</strong> Armazena em formato BSON (JSON binário) — igual ao JavaScript. Você lê do banco e usa direto, sem converter nada!</p>
+    <h4>💻 Exemplo de Código:</h4>
+<pre><code>await db.collection("usuarios").insertOne({
+    nome: "Tosh",
+    cargo: "Dono"
+});</code></pre>
+
+    <h4>📋 Regras de Operadores — MongoDB (Consultas)</h4>
+    <table class="tabela-operadores">
+        <tr><th>Operador</th><th>O que faz</th><th>Exemplo de Consulta</th></tr>
+        <tr><td class="sinal">$eq</td><td>Igual a</td><td><code>{ idade: { $eq: 18 } }</code></td></tr>
+        <tr><td class="sinal">$ne</td><td>Diferente de</td><td><code>{ cargo: { $ne: "banido" } }</code></td></tr>
+        <tr><td class="sinal">$gt</td><td>Maior que</td><td><code>{ pontos: { $gt: 100 } }</code></td></tr>
+        <tr><td class="sinal">$gte</td><td>Maior ou igual</td><td><code>{ idade: { $gte: 18 } }</code></td></tr>
+        <tr><td class="sinal">$lt</td><td>Menor que</td><td><code>{ preco: { $lt: 50 } }</code></td></tr>
+        <tr><td class="sinal">$lte</td><td>Menor ou igual</td><td><code>{ estoque: { $lte: 10 } }</code></td></tr>
+        <tr><td class="sinal">$in</td><td>Está na lista</td><td><code>{ cargo: { $in: ["admin", "dono"] } }</code></td></tr>
+        <tr><td class="sinal">$nin</td><td>Não está na lista</td><td><code>{ status: { $nin: ["banido", "inativo"] } }</code></td></tr>
+        <tr><td class="sinal">$and</td><td>E — todas as condições</td><td><code>{ $and: [cond1, cond2] }</code></td></tr>
+        <tr><td class="sinal">$or</td><td>OU — qualquer condição</td><td><code>{ $or: [cond1, cond2] }</code></td></tr>
+        <tr><td class="sinal">$not</td><td>NÃO — inverte</td><td><code>{ preco: { $not: { $lt: 10 } } }</code></td></tr>
+        <tr><td class="sinal">$exists</td><td>Campo existe</td><td><code>{ email: { $exists: true } }</code></td></tr>
+        <tr><td class="sinal">$regex</td><td>Busca por padrão</td><td><code>{ nome: { $regex: "^T", $options: "i" } }</code></td></tr>
+    </table>
+</div>
+
+<div class="linha"></div>
+
+<p class="assinatura">
+    ⚡ Criado com 💜 por <strong>Tosh Tech</strong> — O Lado Forte da Tecnologia<br>
+    Sempre aprendendo, sempre evoluindo 🚀
+</p>
+
+</body>
+</html>

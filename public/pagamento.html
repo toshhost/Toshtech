@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Renovar Plano • TOSH TECH</title>
+<link rel="icon" type="image/jpeg" href="/logo">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100vw;min-height:100vh;overflow-x:hidden;background:#000000;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:15px;font-family:'Courier New',monospace;font-weight:700;letter-spacing:1px;position:relative;padding:18px 10px 35px}
+#particulas{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:0}
+.particula{position:absolute;background:#C0C0C0;border-radius:50%;opacity:0;animation:flutuar linear infinite;box-shadow:0 0 3px rgba(192,192,192,.35)}
+
+/* ✅ BOTÃO VOLTAR */
+.botao-voltar{position:absolute;top:15px;right:15px;display:flex;align-items:center;gap:4px;color:#888888;font-size:11px;font-weight:500;cursor:pointer;transition:all .3s ease;z-index:10}
+.botao-voltar:hover{color:#FFFFFF}
+.botao-voltar svg{width:16px;height:16px;fill:#888888}
+
+/* ✅ TÍTULO */
+.titulo-marca{color:#FFFFFF;font-size:26px;text-transform:uppercase;opacity:0;animation:surgir 1.5s ease-out forwards;text-shadow:0 0 12px rgba(255,255,255,.4);z-index:2;margin-top:40px}
+.subtitulo{color:#A0A0A0;font-size:12px;opacity:0;animation:surgir 1.5s ease-out .15s forwards;z-index:2;text-align:center}
+
+/* ✅ LISTA DE PLANOS */
+.lista-planos{width:94%;max-width:480px;display:flex;flex-direction:column;gap:9px;z-index:2;opacity:0;animation:surgir 1.5s ease-out .3s forwards}
+.card-plano{background:rgba(10,10,10,.9);border:2px solid #666666;border-radius:9px;padding:13px;transition:all .3s ease;cursor:pointer}
+.card-plano:hover{border-color:#C0C0C0;transform:translateY(-1px)}
+.nome-plano{color:#E0E0E0;font-size:15px;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.detalhes-plano{display:flex;flex-direction:column;gap:4px;margin-bottom:9px}
+.linha-detalhe{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px}
+.valor-plano{color:#FFFFFF;font-size:17px;font-weight:800}
+.info-plano{color:#888888;font-size:11px}
+.btn-escolher{width:100%;padding:8px;border:1px solid #777777;border-radius:6px;background:rgba(20,20,20,.8);color:#D0D0D0;font-size:12px;font-weight:700;text-transform:uppercase;cursor:pointer;transition:all .3s ease}
+.btn-escolher:hover{background:rgba(40,40,40,.9);border-color:#FFFFFF;color:#FFFFFF}
+
+/* ✅ MODAL PIX — MENOR ALTURA, MAIS LARGURA */
+.modal-pix{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.97);z-index:9999;align-items:center;justify-content:center;padding:4px;overflow-y:auto}
+.modal-pix.aberto{display:flex}
+.modal-conteudo{background:#080808;border:1px solid #777777;border-radius:8px;padding:6px 12px;width:96%;max-width:340px;text-align:center;margin:auto}
+.modal-titulo{color:#FFFFFF;font-size:14px;margin-bottom:3px;display:flex;align-items:center;justify-content:center;gap:4px}
+.modal-texto{color:#A0A0A0;font-size:10px;margin-bottom:5px;line-height:1.2}
+
+/* ✅ RESUMO COMPACTO */
+.resumo-compra{background:rgba(12,12,12,.7);border:1px solid #333333;border-radius:6px;padding:6px 8px;margin-bottom:5px;text-align:left}
+.resumo-titulo{color:#909090;font-size:9px;text-transform:uppercase;margin-bottom:3px;border-bottom:1px solid #222;padding-bottom:2px}
+.resumo-item{display:flex;justify-content:space-between;margin-bottom:2px;font-size:9px}
+
+/* ✅ QR CODE MENOR */
+.qr-box{background:#FFFFFF;border-radius:6px;padding:6px;margin:5px auto;max-width:130px}
+.qr-box img{width:100%;height:auto;display:block;border-radius:2px}
+
+/* ✅ CÓDIGO E BOTÃO */
+.copia-cola{width:100%;padding:5px;border:1px solid #666666;border-radius:6px;background:#000000;color:#C0C0C0;font-size:8px;word-break:break-all;margin-bottom:5px;line-height:1.2}
+.btn-copiar,.btn-fechar{padding:6px 14px;border-radius:6px;border:none;font-size:10px;font-weight:700;text-transform:uppercase;cursor:pointer;transition:all .3s ease;margin:2px;display:inline-flex;align-items:center;gap:3px}
+
+/* ✅ GARANTE QUE NADA FICA FORA DA TELA */
+@media (max-height: 550px) {
+  .modal-conteudo { padding: 8px; max-width: 270px; }
+  .qr-box { max-width: 120px; padding: 5px; }
+  .modal-titulo { font-size: 14px; }
+  .btn-copiar, .btn-fechar { padding: 5px 12px; font-size: 9px; }
+}
+
+/* ✅ BRILHO ANIMADO NA BORDA */
+.alerta-personalizado::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  background-size: 200% 100%;
+  border-radius: 14px;
+  z-index: -1;
+  animation: brilhoBorda 2.5s linear infinite;
+}
+
+@keyframes brilhoBorda {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ✅ ESTILO ALERTA: PRATA METÁLICO • FUNDO PRETO • BORDA GRADIENTE */
+.alerta-personalizado {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: linear-gradient(145deg, #0a0a0a, #151515);
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #C0C0C0, #FFFFFF, #C0C0C0, #A8A8A8) 1;
+  border-radius: 12px;
+  padding: 22px 25px;
+  width: 88%;
+  max-width: 300px;
+  z-index: 99999;
+  text-align: center;
+  box-shadow: 
+    0 0 25px rgba(192,192,192,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.alerta-personalizado.aberto {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: all;
+}
+
+/* ✅ RESUMO COMPACTO */
+.resumo-compra{background:rgba(12,12,12,.7);border:1px solid #333333;border-radius:6px;padding:8px;margin-bottom:10px;text-align:left}
+.resumo-titulo{color:#909090;font-size:10px;text-transform:uppercase;margin-bottom:5px;border-bottom:1px solid #222;padding-bottom:2px}
+.resumo-item{display:flex;justify-content:space-between;margin-bottom:3px;font-size:10px}
+.resumo-rotulo{color:#777777}
+.resumo-valor{color:#D0D0D0;font-weight:700}
+
+/* ✅ QR CODE MENOR E SEM CORTES */
+.qr-box{background:#FFFFFF;border-radius:6px;padding:8px;margin:8px auto;max-width:160px}
+.qr-box img{width:100%;height:auto;display:block;border-radius:3px}
+
+.copia-cola{width:100%;padding:7px;border:1px solid #666666;border-radius:6px;background:#000000;color:#C0C0C0;font-size:9px;word-break:break-all;margin-bottom:8px;line-height:1.3}
+.btn-copiar,.btn-fechar{padding:7px 16px;border-radius:6px;border:none;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer;transition:all .3s ease;margin:3px;display:inline-flex;align-items:center;gap:3px}
+.btn-copiar{background:#C0C0C0;color:#000000}
+.btn-copiar:hover{background:#FFFFFF}
+.btn-fechar{background:transparent;border:2px solid #666666;color:#A0A0A0}
+.btn-fechar:hover{border-color:#FFFFFF;color:#FFFFFF}
+
+/* ✅ RESUMO COMPACTO */
+.resumo-compra{background:rgba(12,12,12,.7);border:1px solid #333333;border-radius:6px;padding:10px;margin-bottom:12px;text-align:left}
+.resumo-titulo{color:#909090;font-size:11px;text-transform:uppercase;margin-bottom:6px;border-bottom:1px solid #222;padding-bottom:3px}
+.resumo-item{display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px}
+.resumo-rotulo{color:#777777}
+.resumo-valor{color:#D0D0D0;font-weight:700}
+
+/* ✅ QR CODE MENOR AINDA */
+.qr-box{background:#FFFFFF;border-radius:6px;padding:10px;margin:10px auto;max-width:180px}
+.qr-box img{width:100%;height:auto;display:block;border-radius:3px}
+
+.copia-cola{width:100%;padding:8px;border:1px solid #666666;border-radius:6px;background:#000000;color:#C0C0C0;font-size:10px;word-break:break-all;margin-bottom:10px;line-height:1.3}
+.btn-copiar,.btn-fechar{padding:8px 18px;border-radius:6px;border:none;font-size:12px;font-weight:700;text-transform:uppercase;cursor:pointer;transition:all .3s ease;margin:4px;display:inline-flex;align-items:center;gap:4px}
+.btn-copiar{background:#C0C0C0;color:#000000}
+.btn-copiar:hover{background:#FFFFFF}
+.btn-fechar{background:transparent;border:2px solid #666666;color:#A0A0A0}
+.btn-fechar:hover{border-color:#FFFFFF;color:#FFFFFF}
+
+/* ✅ ANIMAÇÕES */
+@keyframes surgir{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes flutuar{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.5}90%{opacity:.5}100%{transform:translateY(-30px) rotate(360deg);opacity:0}}
+</style>
+</head>
+<body>
+<div id="particulas"></div>
+
+<div class="botao-voltar" onclick="window.history.back()">
+  <svg viewBox="0 0 24 24">
+    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+  </svg>
+  <span>Voltar</span>
+</div>
+
+<div class="titulo-marca">PLANOS E PAGAMENTOS</div>
+<div class="subtitulo">Pagamento via Pix • Confirmação automática</div>
+
+<!-- ✅ LISTA COM PLANOS PAGOS -->
+<div class="lista-planos">
+  <div class="card-plano" onclick="escolherPlano('Iniciante')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Iniciante
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 1,00</span><span class="info-plano">3 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">101 a 300 req</span><span class="info-plano">+300 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Aprendiz')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+      Aprendiz
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 2,00</span><span class="info-plano">7 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">301 a 500 req</span><span class="info-plano">+500 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Estagiário')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-6 0h-4V5h4v2z"/></svg>
+      Estagiário
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 3,50</span><span class="info-plano">10 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">501 a 1.000 req</span><span class="info-plano">+1.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Desenvolvedor Júnior')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+      Desenvolvedor Júnior
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 5,00</span><span class="info-plano">15 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">1.001 a 2.000 req</span><span class="info-plano">+2.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Desenvolvedor Pleno')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.39-1.08-.7-1.66-.94l-.38-2.65c-.03-.24-.24-.42-.48-.42h-4c-.24 0-.45.18-.48.42l-.38 2.65c-.58.24-1.14.55-1.66.94l-2.49-1c-.22-.08-.49 0-.61.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.64-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.39 1.08.7 1.66.94l.38 2.65c.03.24.24.42.48.42h4c.24 0 .45.18.48.42l.38-2.65c.58-.24 1.14-.55 1.66-.94l2.49 1c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-7.43 2.52c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+      Desenvolvedor Pleno
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 8,00</span><span class="info-plano">20 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">2.001 a 3.500 req</span><span class="info-plano">+3.500 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Desenvolvedor Sênior')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      Desenvolvedor Sênior
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 12,00</span><span class="info-plano">25 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">3.501 a 5.000 req</span><span class="info-plano">+5.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Engenheiro de Software')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Engenheiro de Software
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 20,00</span><span class="info-plano">30 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">5.001 a 8.000 req</span><span class="info-plano">+8.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Arquiteto de Sistemas')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+      Arquiteto de Sistemas
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 35,00</span><span class="info-plano">45 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">8.001 a 12.000 req</span><span class="info-plano">+12.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Mestre dos Códigos')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      Mestre dos Códigos
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 60,00</span><span class="info-plano">60 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">12.001 a 15.000 req</span><span class="info-plano">+15.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Lendário da Tecnologia')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+      Lendário da Tecnologia
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 100,00</span><span class="info-plano">90 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">15.001 a 30.000 req</span><span class="info-plano">+30.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Gênio da Computação')">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#C0C0C0"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+      Gênio da Computação
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 200,00</span><span class="info-plano">180 dias</span></div>
+      <div class="linha-detalhe"><span class="info-plano">30.001 a 100.000 req</span><span class="info-plano">+100.000 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher">Contratar</button>
+  </div>
+
+  <div class="card-plano" onclick="escolherPlano('Criador de Tecnologias')" style="border-color:#C0C0C0;box-shadow:0 0 12px rgba(255,255,255,.1)">
+    <div class="nome-plano">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      Criador de Tecnologias
+    </div>
+    <div class="detalhes-plano">
+      <div class="linha-detalhe"><span class="valor-plano">R$ 500,00</span><span class="info-plano">Permanente</span></div>
+      <div class="linha-detalhe"><span class="info-plano">Requisições ilimitadas</span><span class="info-plano">+999.999.999 TechCoins</span></div>
+    </div>
+    <button class="btn-escolher" style="background:rgba(30,30,30,.9);border-color:#C0C0C0">Contratar</button>
+  </div>
+</div>
+
+<!-- ✅ MODAL PIX COMPACTO -->
+<div class="modal-pix" id="modalPix">
+  <div class="modal-conteudo">
+    <h2 class="modal-titulo" id="tituloPlano">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="#FFFFFF"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+      Processando...
+    </h2>
+
+    <div class="resumo-compra" id="resumoCompra" style="display:none">
+      <div class="resumo-titulo">Resumo</div>
+      <div class="resumo-item"><span class="resumo-rotulo">Plano:</span><span class="resumo-valor" id="resumoNomePlano"></span></div>
+      <div class="resumo-item"><span class="resumo-rotulo">Valor:</span><span class="resumo-valor" id="resumoValorPlano"></span></div>
+      <div class="resumo-item"><span class="resumo-rotulo">Validade:</span><span class="resumo-valor" id="resumoValidade"></span></div>
+      <div class="resumo-item"><span class="resumo-rotulo">Requisições:</span><span class="resumo-valor" id="resumoRequisicoes"></span></div>
+      <div class="resumo-item"><span class="resumo-rotulo">TechCoins:</span><span class="resumo-valor" id="resumoCoins"></span></div>
+    </div>
+
+    <p class="modal-texto">Escaneie ou use Copia e Cola no app do banco • Tosh Tech</p>
+    
+    <div class="qr-box" id="boxQr" style="display:none">
+      <img id="imgQr" alt="QR Code Pix">
+    </div>
+    
+    <div class="copia-cola" id="codigoPix" style="display:none"></div>
+    
+    <button class="btn-copiar" id="btnCopiar" style="display:none" onclick="copiarCodigo()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      Copiar Pix
+    </button>
+    <br><br>
+    <button class="btn-fechar" onclick="fecharModal()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      Fechar
+    </button>
+  </div>
+</div>
+
+<script>
+// ✅ PARTÍCULAS
+const container=document.getElementById('particulas');
+for(let i=0;i<50;i++){
+  const p=document.createElement('div');
+  p.classList.add('particula');
+  const t=Math.random()*2+1;
+  p.style.width=`${t}px`;
+  p.style.height=`${t}px`;
+  p.style.left=`${Math.random()*100}%`;
+  const d=Math.random()*9+6;
+  p.style.animationDuration=`${d}s`;
+  p.style.animationDelay=`${Math.random()*d}s`;
+  container.appendChild(p);
+}
+
+// ✅ DADOS DOS PLANOS
+const DADOS_PLANOS = {
+  'Iniciante': { valor: 'R$ 1,00', validade: '3 dias', req: '101 a 300', coins: '300' },
+  'Aprendiz': { valor: 'R$ 2,00', validade: '7 dias', req: '301 a 500', coins: '500' },
+  'Estagiário': { valor: 'R$ 3,50', validade: '10 dias', req: '501 a 1.000', coins: '1.000' },
+  'Desenvolvedor Júnior': { valor: 'R$ 5,00', validade: '15 dias', req: '1.001 a 2.000', coins: '2.000' },
+  'Desenvolvedor Pleno': { valor: 'R$ 8,00', validade: '20 dias', req: '2.001 a 3.500', coins: '3.500' },
+  'Desenvolvedor Sênior': { valor: 'R$ 12,00', validade: '25 dias', req: '3.501 a 5.000', coins: '5.000' },
+  'Engenheiro de Software': { valor: 'R$ 20,00', validade: '30 dias', req: '5.001 a 8.000', coins: '8.000' },
+  'Arquiteto de Sistemas': { valor: 'R$ 35,00', validade: '45 dias', req: '8.001 a 12.000', coins: '12.000' },
+  'Mestre dos Códigos': { valor: 'R$ 60,00', validade: '60 dias', req: '12.001 a 15.000', coins: '15.000' },
+  'Lendário da Tecnologia': { valor: 'R$ 100,00', validade: '90 dias', req: '15.001 a 30.000', coins: '30.000' },
+  'Gênio da Computação': { valor: 'R$ 200,00', validade: '180 dias', req: '30.001 a 100.000', coins: '100.000' },
+  'Criador de Tecnologias': { valor: 'R$ 500,00', validade: 'Permanente', req: 'Ilimitadas', coins: '999.999.999' }
+};
+
+// ✅ FUNÇÃO PRINCIPAL
+async function escolherPlano(nomePlano) {
+  const token = localStorage.getItem('tosh_tech') || localStorage.getItem('emailUsuario') || '';
+  if (!token || !token.includes('@')) {
+    alert('Faça login primeiro • Tosh Tech');
+    window.location.href = '/';
+    return;
+  }
+
+  const modal = document.getElementById('modalPix');
+  const titulo = document.getElementById('tituloPlano');
+  const resumo = document.getElementById('resumoCompra');
+  const boxQr = document.getElementById('boxQr');
+  const codigoPix = document.getElementById('codigoPix');
+  const btnCopiar = document.getElementById('btnCopiar');
+
+  modal.classList.add('aberto');
+  document.body.style.overflow = 'hidden';
+  titulo.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="#FFFFFF"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0 1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg> Gerando Pix...`;
+  resumo.style.display = 'none';
+  boxQr.style.display = 'none';
+  codigoPix.style.display = 'none';
+  btnCopiar.style.display = 'none';
+
+  try {
+    const res = await fetch(`/api/pix/gerar?nomePlano=${encodeURIComponent(nomePlano)}`, {
+      headers: { 'tosh_tech': token.trim().toLowerCase() }
+    });
+    const dados = await res.json();
+
+    if (!dados.sucesso) throw new Error(dados.erro || 'Erro • Tosh Tech');
+
+    const dadosPlano = DADOS_PLANOS[nomePlano];
+    document.getElementById('resumoNomePlano').textContent = nomePlano;
+    document.getElementById('resumoValorPlano').textContent = dadosPlano.valor;
+    document.getElementById('resumoValidade').textContent = dadosPlano.validade;
+    document.getElementById('resumoRequisicoes').textContent = dadosPlano.req;
+    document.getElementById('resumoCoins').textContent = dadosPlano.coins;
+    resumo.style.display = 'block';
+
+    titulo.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="#FFFFFF"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Pix Gerado!`;
+    document.getElementById('imgQr').src = `data:image/png;base64,${dados.dados.qrcode_base64}`;
+    codigoPix.textContent = dados.dados.copia_cola;
+    boxQr.style.display = 'block';
+    codigoPix.style.display = 'block';
+    btnCopiar.style.display = 'flex';
+
+  } catch (erro) {
+    titulo.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="#FFFFFF"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> Falha`;
+    alert(erro.message || 'Tente novamente • Tosh Tech');
+    fecharModal();
+  }
+}
+
+// ✅ ALERTA PERSONALIZADO NO ESTILO TOSH TECH
+async function copiarCodigo() {
+  const codigo = document.getElementById('codigoPix').textContent;
+  await navigator.clipboard.writeText(codigo);
+  
+  // ✅ CRIA O ALERTA AUTOMATICAMENTE
+  const fundo = document.createElement('div');
+  fundo.className = 'fundo-alerta';
+  const alerta = document.createElement('div');
+  alerta.className = 'alerta-personalizado';
+  alerta.innerHTML = `
+    <div class="alerta-titulo">Tosh Tech Qr</div>
+    <div class="alerta-texto">Código copiado! • Com sucesso</div>
+    <button class="alerta-botao" onclick="fecharAlerta()">OK</button>
+  `;
+  
+  document.body.appendChild(fundo);
+  document.body.appendChild(alerta);
+  
+  // ✅ ANIMAÇÃO DE ABERTURA
+  setTimeout(() => {
+    fundo.classList.add('aberto');
+    alerta.classList.add('aberto');
+  }, 10);
+}
+
+// ✅ FUNÇÃO PARA FECHAR O ALERTA
+function fecharAlerta() {
+  const fundo = document.querySelector('.fundo-alerta');
+  const alerta = document.querySelector('.alerta-personalizado');
+  
+  fundo.classList.remove('aberto');
+  alerta.classList.remove('aberto');
+  
+  setTimeout(() => {
+    fundo.remove();
+    alerta.remove();
+  }, 300);
+}
+
+function fecharModal() {
+  document.getElementById('modalPix').classList.remove('aberto');
+  document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') fecharModal();
+});
+</script>
+</body>
+</html>

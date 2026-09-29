@@ -1,0 +1,90 @@
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New',monospace;font-weight:700;letter-spacing:.5px}
+body{background:#000;color:#c5c5c5;min-height:100vh;padding:20px 12px;position:relative;overflow-x:hidden}
+
+.particula-prata{position:absolute;width:2px;height:2px;background:rgba(197,197,197,.6);border-radius:50%;pointer-events:none;animation:flutuar linear infinite}
+@keyframes flutuar{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+
+.container{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.painel-container{padding-top:10px}
+
+.logo-caixa{text-align:center;margin-bottom:20px;position:relative}
+.aureola{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;border:1px solid rgba(197,197,197,.2);animation:pulsar 3s infinite ease-in-out}
+.asas{display:flex;justify-content:space-between;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:40px}
+.asa{width:35px;height:2px;background:#c5c5c5;opacity:.7}
+.asa-esq{transform:rotate(-15deg) translateX(-10px)}
+.asa-dir{transform:rotate(15deg) translateX(10px)}
+@keyframes pulsar{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(1)}50%{opacity:.6;transform:translate(-50%,-50%) scale(1.05)}}
+.logo-img{width:90px;height:90px;border-radius:50%;border:2px solid #c5c5c5;box-shadow:0 0 15px rgba(197,197,197,.3);position:relative;z-index:2}
+
+.prata{color:#c5c5c5;text-shadow:0 0 8px rgba(197,197,197,.4)}
+h1{font-size:1.6rem;margin-bottom:4px;text-transform:uppercase;text-align:center}
+.creditos{text-align:center;font-size:.8rem;color:#888;margin-bottom:15px}
+.creditos span{color:#c5c5c5}
+.linha-prata{border:none;height:1px;background:linear-gradient(90deg,transparent,#c5c5c5,transparent);margin-bottom:20px}
+
+.alerta{padding:12px;border-radius:6px;margin-bottom:15px;text-align:center;border:1px solid transparent;transition:.3s}
+.alerta.sucesso{background:rgba(16,185,129,.1);color:#10b981;border-color:#10b981}
+.alerta.erro{background:rgba(239,68,68,.1);color:#ef4444;border-color:#ef4444}
+.alerta.info{background:rgba(59,130,246,.1);color:#3b82f6;border-color:#3b82f6}
+
+.card{background:#0a0a0a;border-radius:8px;padding:15px;margin-bottom:15px;border:1px solid #222;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+h2{font-size:1.2rem;color:#c5c5c5;margin-bottom:15px;padding-left:10px;border-left:3px solid #c5c5c5;text-transform:uppercase;display:flex;align-items:center}
+
+.input-caixa{margin-bottom:12px}
+.input-caixa select,.input-caixa input,.input-caixa textarea{width:100%;padding:10px 12px;background:#050505;border:1px solid #333;border-radius:6px;color:#c5c5c5;font-family:inherit;font-size:.9rem;outline:none;transition:.2s}
+.input-caixa select:focus,.input-caixa input:focus,.input-caixa textarea:focus{border-color:#c5c5c5;box-shadow:0 0 6px rgba(197,197,197,.2)}
+.input-caixa select option{background:#0a0a0a;color:#c5c5c5}
+
+.btn-principal{width:100%;background:#c5c5c5;color:#000;border:none;padding:10px 12px;border-radius:6px;cursor:pointer;font-weight:700;font-size:.9rem;text-transform:uppercase;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-principal:hover{background:#fff;box-shadow:0 0 10px rgba(197,197,197,.4)}
+.btn-pequeno{padding:6px 10px;font-size:.75rem}
+button.vermelho{background:#ef4444;color:#fff}
+button.vermelho:hover{background:#dc2626}
+
+.conteudo-painel{margin-top:15px}
+.texto-aviso{text-align:center;padding:40px 20px;color:#888}
+
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid-item{padding:12px;border-radius:6px;background:#050505;border:1px solid #222}
+.rotulo{font-size:.8rem;color:#888;margin-bottom:4px;text-transform:uppercase}
+.valor{font-size:1.5rem;color:#c5c5c5}
+
+.alerta-lista{padding:12px;border-radius:6px;margin:8px 0;border-left:3px solid #f59e0b;background:rgba(245,158,11,.05)}
+.alerta-vencido{border-left-color:#ef4444;background:rgba(239,68,68,.05)}
+.alerta-vencendo{border-left-color:#f59e0b}
+
+.cargo{display:inline-block;padding:4px 8px;border-radius:4px;font-size:.7rem;text-transform:uppercase;border:1px solid transparent}
+.cargo.dono{background:rgba(245,158,11,.15);color:#f59e0b;border-color:#f59e0b}
+.cargo.suporte{background:rgba(139,92,246,.15);color:#8b5cf6;border-color:#8b5cf6}
+.cargo.usuario{background:rgba(197,197,197,.1);color:#c5c5c5;border-color:#333}
+
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.85rem}
+th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #222;color:#c5c5c5}
+th{background:#050505;color:#888;text-transform:uppercase}
+tr:hover{background:rgba(255,255,255,.02)}
+
+/* ESTILOS DOS RECADOS */
+.recado-item{padding:12px;border-radius:6px;margin-bottom:10px;border-left:3px solid #c5c5c5;background:rgba(10,10,10,.8)}
+.recado-cabecalho{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+.recado-cabecalho strong{font-size:.95rem;color:#c5c5c5}
+.recado-cabecalho small{font-size:.75rem;color:#888}
+.recado-texto{font-size:.85rem;line-height:1.5;color:#b0b0b0}
+.tipo-promocao{border-left-color:#f59e0b;background:rgba(245,158,11,.05)}
+.tipo-aviso{border-left-color:#3b82f6;background:rgba(59,130,246,.05)}
+.tipo-manutencao{border-left-color:#ef4444;background:rgba(239,68,68,.05)}
+.tipo-novidade{border-left-color:#10b981;background:rgba(16,185,129,.05)}
+
+.logs{max-height:180px;overflow-y:auto;background:#050505;padding:10px;border-radius:6px;margin-top:10px;border:1px solid #222}
+.log-item{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #222;font-size:.8rem;color:#888;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.log-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+.arquivos{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.arquivos a{padding:6px 10px;background:#050505;border-radius:4px;color:#c5c5c5;text-decoration:none;font-size:.85rem;border:1px solid #222;transition:.2s}
+.arquivos a:hover{border-color:#c5c5c5;color:#fff;background:rgba(197,197,197,.1)}
+
+@media (max-width:768px){
+  table{display:block;overflow-x:auto}
+  .grid{grid-template-columns:1fr}
+  .recado-cabecalho{flex-direction:column;align-items:flex-start}
+  h2{font-size:1.05rem}
+}

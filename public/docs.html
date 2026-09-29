@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TOSH TECH</title>
+<link rel="icon" type="image/jpeg" href="/logo">
+
+<!-- PWA — PERMITE INSTALAR COMO APLICATIVO NO CELULAR -->
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlRPU0ggVEVDSCIsCiAgInNob3J0X25hbWUiOiAiVE9TSCIsCiAgImRlc2NyaXB0aW9uIjogIkNvbXVuaWRhZGUgb3ZpY2lhbCBkZXMgcHJvamV0b3MsIGZlcnJhbWVudGFzIGUgc29sdWNvZXMgZGVzZW52b2x2aWRhcyBwb3IgVG9zaCIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMDAwMDAwIiwKICAidGhlbWVfY29sb3IiOiAiI2MwYzBjMCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogIi9sb2dvIiwKICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL2pwZWciCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9sb2dvIiwKICAgICAic2l6ZXMiOiAiNTRkeDU0IiwKICAgICAidHlwZSI6ICJpbWFnZS9qcGVnIgogICAgfQogIF0KfQ==">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TOSH TECH">
+<link rel="apple-touch-icon" href="/logo">
+<meta name="description" content="Comunidade oficial dos projetos, ferramentas e soluções desenvolvidas por Tosh. Tecnologia, código e inovação.">
+
+<link rel="stylesheet" href="/assets/temas/ToshTech/docs.css">
+</head>
+<body>
+
+<div id="particulas"></div>
+
+<div class="menu-area" onclick="window.location.href='/login'">
+  <div class="menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <span class="menu-texto">Login</span>
+</div>
+
+<div class="bem-vindo">BEM-VINDO</div>
+<div class="info-api" id="infoApi"></div>
+
+<div class="video-container">
+  <video src="/docbord" autoplay loop muted playsinline>
+    Seu navegador não suporta vídeos.
+  </video>
+</div>
+
+<div class="link-com-qr">
+  <a href="/tutorial" class="link-tutorial">DOCUMENTAÇÃO TOSH TECH</a>
+  <div class="qr-container" onclick="abrirImagem('/meuqr')" title="Clique para ampliar QR Code">
+    <img src="/meuqr" class="qr-miniatura" alt="QR Code">
+  </div>
+</div>
+
+<div class="quadro-total">
+  <h3>Total de Visitantes</h3>
+  <div class="numero-total" id="total-geral">0</div>
+</div>
+
+<div class="avatares-wrapper">
+  <div class="avatar-container" onclick="abrirImagem('/avatar1')">
+    <div class="aureola"></div>
+    <div class="asa-esq"></div>
+    <div class="asa-dir"></div>
+    <div class="avatar-centro"></div>
+  </div>
+  <div class="avatar-container" onclick="abrirImagem('/avatar2')">
+    <div class="aureola"></div>
+    <div class="asa-esq"></div>
+    <div class="asa-dir"></div>
+    <div class="avatar-centro segundo"></div>
+  </div>
+</div>
+
+<!-- ✅ 3 CARDS — REDES -->
+<div class="cards-redes">
+  <a href="https://chat.whatsapp.com/KAjVfoqFhvtLN60nIwFZdg" target="_blank" class="card-rede" rel="noopener noreferrer">
+    <div class="card-icone">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.37-.012-.57-.012-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.217 3.074.149.198 2.096 3.2 5.077 4.487.709.305 1.262.489 1.694.625.76.22 1.45.195 1.997.118.61-.09 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004c-2.026 0-3.935-.785-5.363-2.212-1.428-1.428-2.212-3.337-2.212-5.363 0-2.027.784-3.935 2.212-5.364 1.428-1.427 3.337-2.211 5.364-2.211 2.026 0 3.935.784 5.363 2.211 1.428 1.429 2.212 3.337 2.212 5.364 0 2.025-.784 3.933-2.212 5.363-1.428 1.427-3.337 2.211-5.363 2.211M17.744 6.185C16.116 4.557 13.958 3.69 11.681 3.69c-4.378 0-7.938 3.558-7.94 7.938 0 1.565.367 3.078 1.062 4.441L3.5 21l5.015-1.314a7.898 7.898 0 0 0 3.16.647l.003.002c4.378 0 7.938-3.559 7.939-7.94 0-2.255-.878-4.372-2.467-5.963z"/>
+      </svg>
+    </div>
+    <span class="card-legenda">GRUPO<br>WHATSAPP</span>
+  </a>
+  <a href="https://t.me/corporativotoshtech" target="_blank" class="card-rede" rel="noopener noreferrer">
+    <div class="card-icone">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+      </svg>
+    </div>
+    <span class="card-legenda">GRUPO<br>TELEGRAM</span>
+  </a>
+  <a href="http://www.youtube.com/@ToshTech-t8y" target="_blank" class="card-rede" rel="noopener noreferrer">
+    <div class="card-icone">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+    </div>
+    <span class="card-legenda">CANAL<br>YOUTUBE</span>
+  </a>
+</div>
+
+<!-- ✅ SEÇÃO 1 — PÁGINAS E SITES -->
+<div class="secao-servicos">
+  <div class="card-servico">
+    <img src="/paginast" class="capa-servico" onclick="abrirImagem('/paginast')" alt="Páginas e Sites Profissionais — Tosh Tech" title="Clique para ampliar">
+    <div class="conteudo-servico">
+      <h3 class="titulo-servico">🖥️ PÁGINAS & SITES <span>• Desenvolvedores e Empresas</span></h3>
+      <p class="desc-servico">Criamos páginas e sites profissionais sob medida. Soluções completas para desenvolvedores e empresas que buscam presença digital com qualidade, segurança e performance.</p>
+      
+      <div class="preco-destaque">
+        <div class="preco-titulo">💰 Investimento</div>
+        <div class="preco-valor">Sob Consulta</div>
+        <div class="preco-obs">Projetos personalizados — orçamento feito conforme sua necessidade</div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">✅ Por que confiar na Tosh Tech?</h4>
+        <div class="bloco-texto">
+          <div class="lista-itens">
+            <div class="item-linha">Código limpo, documentado e seguindo as melhores práticas do mercado</div>
+            <div class="item-linha">Segurança rigorosa em todas as APIs e sistemas</div>
+            <div class="item-linha">Suporte contínuo e acompanhamento do projeto</div>
+            <div class="item-linha">Entregas pontuais e comunicação transparente</div>
+            <div class="item-linha">Design exclusivo com identidade visual profissional</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">💻 Tecnologias que dominamos</h4>
+        <div class="linguagens">
+          <span class="tag-lang">Node.js</span>
+          <span class="tag-lang">JavaScript</span>
+          <span class="tag-lang">HTML5</span>
+          <span class="tag-lang">CSS3 / SVG</span>
+          <span class="tag-lang">APIs REST</span>
+          <span class="tag-lang">Express.js</span>
+          <span class="tag-lang">Bancos de Dados</span>
+          <span class="tag-lang">Autenticação JWT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ SEÇÃO 2 — AGENTES & BOTS IA -->
+  <div class="card-servico">
+    <img src="/agentestest" class="capa-servico" onclick="abrirImagem('/agentestest')" alt="Agentes e Bots IA — Tosh Tech" title="Clique para ampliar">
+    <div class="conteudo-servico">
+      <h3 class="titulo-servico">🤖 AGENTES & BOTS IA <span>• Automação Inteligente</span></h3>
+      <p class="desc-servico">Desenvolvemos agentes de IA personalizados e bots inteligentes para diversas plataformas. Automatize atendimentos, anúncios e interações com tecnologia de ponta.</p>
+      
+      <div class="preco-destaque">
+        <div class="preco-titulo">💰 Planos a partir de</div>
+        <div class="preco-valor destaque-verde">R$ 20,00 <span style="font-size:14px;color:#888;">/mês</span></div>
+        <div class="preco-obs">Aluguel de agentes IA — valor mínimo. Projetos exclusivos sob consulta.</div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">🌍 Plataformas que atendemos</h4>
+        <div class="lista-itens">
+          <div class="item-linha">📱 WhatsApp — Atendimento e automação de mensagens</div>
+          <div class="item-linha">✈️ Telegram — Grupos, canais e respostas automáticas</div>
+          <div class="item-linha">🎮 Discord — Moderação, comandos e comunidade</div>
+          <div class="item-linha">🌐 Outros Sites — Integração via API e Webhooks</div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">📊 O que oferecemos</h4>
+        <div class="lista-itens">
+          <div class="item-linha destaque-ouro"><strong>+80 Agentes IA</strong> — Modelos prontos e personalizados</div>
+          <div class="item-linha">🤖 Bots de Anúncio — Divulgação automática em grupos e canais</div>
+          <div class="item-linha">📹 Anúncios em Vídeo — Campanhas visuais profissionais</div>
+          <div class="item-linha">🔐 Tenha Bots personalizados do seu gosto a partir de R$ 50,00 — tire sua ideia do papel!</div>
+          <div class="item-linha">▶️ Bots de divulgação e crescimento de canal</div>
+          <div class="item-linha">▶️ Bots de entretenimento para grupos</div>
+          <div class="item-linha">▶️ Bots de vendas com personalidade</div>
+          <div class="item-linha">▶️ Bots de RPG</div>
+          <div class="item-linha">▶️ Agente IA para sites e plataformas</div>
+          <div class="item-linha">👥 Grupos Próprios — Divulgação nas nossas bases e comunidades</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ TEXTO PRINCIPAL DA MARCA -->
+<div class="texto-marca">
+TOSH TECH • O LADO FORTE DA TECNOLOGIA.<br>
+CÓDIGO, DESIGN E INOVAÇÃO COM A SUA CARA.
+</div>
+
+<!-- ✅ BOTÕES DE NAVEGAÇÃO -->
+<div class="botoes-navegacao">
+  <a href="/toshstream/pagina" class="btn-navegacao">TOSHSTREAM</a>
+  <a href='/portifolio' class="btn-navegacao">PORTFÓLIO</a>
+  <a href="/desenvolvedores" class="btn-navegacao">DEVELOPERS</a>
+</div>
+
+<!-- ✅ LOGO NO FINAL -->
+<div class="logo-rodape-container" onclick="abrirImagem('/logo')" title="Ver Logo Tosh Tech">
+  <div class="logo-rodape"></div>
+</div>
+<div class="texto-avatares">© TOSH TECH • TODOS OS DIREITOS RESERVADOS</div>
+
+<div class="modal-imagem" id="modalFoto" onclick="fecharImagem()">
+  <img id="fotoGrande" alt="Imagem ampliada">
+</div>
+
+<div id="avisoCookies" style="position:fixed;bottom:12px;left:10px;right:10px;max-width:380px;margin:auto;background:linear-gradient(145deg,#080808,#121212);border:1px solid #C0C0C0;border-radius:8px;padding:12px;z-index:99999;display:none;box-shadow:0 0 15px rgba(192,192,192,0.25);">
+  <p style="color:#E0E0E0;font-family:'Courier New',monospace;font-size:12px;line-height:1.4;margin:0 0 10px 0;">Na Tosh Tech, usamos cookies para que o site funcione melhor. Eles servem para segurar sua sessão, salvar configurações e nos ajudar a consertar possíveis lentidões. Ao clicar Aceito, você concorda com essa ajudinha técnica.</p>
+  <button onclick="aceitarCookies()" style="width:100%;padding:9px;background:linear-gradient(145deg,#D8D8D8,#A8A8A8);color:#000000;font-family:'Courier New',monospace;font-size:12px;font-weight:700;border:none;border-radius:6px;cursor:pointer;transition:all .2s ease;">Entendi e Aceito</button>
+</div>
+
+<script src="js/docs.js"></script>
+</body>
+</html>

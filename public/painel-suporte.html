@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#000000">
+<title>TOSH TECH</title>
+<link rel="icon" type="image/jpeg" href="/logo">
+<link rel="stylesheet" href="assets/temas/ToshTech/painel-suporte.css">
+<script>
+async function carregarConfig(){
+try{
+const res = await fetch('/api/config');
+const dados = await res.json();
+document.title = dados.NomeApi ? `Suporte | ${dados.NomeApi}` : 'Suporte | TOSH TECH';
+document.getElementById('nomeSistema').textContent = dados.NomeApi || 'TOSH TECH';
+document.getElementById('creditosSistema').innerHTML = `Criado por <span>${dados.Criador || 'Tosh'}</span> • Versão <span>2.0</span>`;
+}catch(e){
+console.warn('⚠️ Não foi possível carregar configurações:', e.message);
+document.getElementById('nomeSistema').textContent = 'TOSH TECH';
+document.getElementById('creditosSistema').innerHTML = 'Criado por <span>Tosh</span> • Versão <span>2.0</span>';
+}}
+carregarConfig();
+</script>
+</head>
+<body>
+<div id="fundoParticulas"></div>
+<div class="container painel-container">
+<div class="logo-caixa">
+<div class="aureola"></div>
+<div class="asas"><div class="asa asa-esq"></div><div class="asa asa-dir"></div></div>
+<img src="/logo" alt="Logo TOSH TECH" class="logo-img">
+</div>
+<h1 class="prata" id="nomeSistema">PAINEL DE SUPORTE</h1>
+<div class="creditos" id="creditosSistema"></div>
+<hr class="linha-prata">
+<div id="msg" class="alerta"></div>
+
+<div class="card">
+<h2>
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;margin-right:8px;vertical-align:middle;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+PUBLICAR RECADO / PROMOÇÃO
+</h2>
+<form id="formRecado" onsubmit="event.preventDefault(); publicarRecado();">
+<div class="input-caixa">
+<select id="tipoRecado" required>
+<option value="recado">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+Recado Geral
+</option>
+<option value="promocao">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+Promoção
+</option>
+<option value="aviso">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+Aviso Importante
+</option>
+<option value="novidade">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+Novidade
+</option>
+<option value="manutencao">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;margin-right:6px;vertical-align:middle;"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+Manutenção
+</option>
+</select>
+</div>
+<div class="input-caixa">
+<input type="text" id="tituloRecado" placeholder="Título do aviso" required maxlength="80">
+</div>
+<div class="input-caixa">
+<textarea id="mensagemRecado" placeholder="Escreva a mensagem completa..." required maxlength="1000" rows="4"></textarea>
+</div>
+<button type="submit" class="btn-principal">
+<svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;margin-right:8px;vertical-align:middle;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+Publicar Agora
+</button>
+</form>
+</div>
+
+<div id="conteudo" class="conteudo-painel">
+<p class="texto-aviso">Carregando dados do painel...</p>
+</div>
+</div>
+<script src="js/painel-suporte.js"></script>
+</body>
+</html>

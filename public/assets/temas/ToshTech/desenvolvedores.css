@@ -1,0 +1,358 @@
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+    --fundo:#000;
+    --texto:#fff;
+    --prata:#b8b8b8;
+    --prata-brilho:#d8d8d8;
+    --destaque:#d4af37;
+    --destaque-escuro:#b8860b;
+    --borda:#2a2a2a;
+    --card:#111;
+    --card-hover:#1a1a1a;
+    --sucesso:#4ade80;
+    --aviso:#facc15;
+    --erro:#f87171;
+    --link:#60a5fa;
+    --codigo:#0f172a;
+    --linha:#333
+}
+
+/* ➪ Reset Universal */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box
+}
+
+/* ➪ Corpo da Página */
+body{
+    background:var(--fundo);
+    color:var(--texto);
+    font-family:'Segoe UI',system-ui,sans-serif;
+    line-height:1.8;
+    padding:20px;
+    max-width:1100px;
+    margin:0 auto
+}
+
+
+/* ➪ Botão de Voltar — Prata, Pequeno, Canto Superior Esquerdo */
+.botao-voltar{
+    position:fixed;
+    top:20px;
+    left:20px;
+    padding:8px 14px;
+    background:transparent;
+    border:1px solid #c5c5c5;
+    color:#c5c5c5;
+    font-size:.8rem;
+    text-transform:uppercase;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s ease;
+    z-index:999
+}
+.botao-voltar:hover{
+    background:#c5c5c5;
+    color:#000;
+    box-shadow:0 0 10px rgba(197,197,197,.4)
+}
+
+/* ➪ Títulos */
+h1,h2,h3,h4{
+    color:var(--destaque);
+    margin:30px 0 15px;
+    line-height:1.3
+}
+
+h1{
+    font-size:2.3rem;
+    border-bottom:2px solid var(--prata);
+    padding-bottom:15px;
+    text-align:center
+}
+
+h2{
+    font-size:1.6rem;
+    margin-top:50px;
+    border-left:3px solid var(--destaque);
+    padding-left:12px
+}
+
+h3{
+    font-size:1.25rem;
+    color:var(--prata-brilho);
+    margin-top:25px
+}
+
+h4{
+    font-size:1.1rem;
+    color:var(--prata);
+    margin-top:20px
+}
+
+/* ➪ Parágrafos e Texto */
+p{
+    margin:14px 0;
+    font-size:1rem
+}
+
+.subtitulo{
+    text-align:center;
+    color:var(--prata);
+    font-size:1.15rem
+}
+
+strong{
+    color:var(--prata-brilho)
+}
+
+.nota{
+    color:var(--prata);
+    font-size:.95rem;
+    margin-top:15px
+}
+
+/* ➪ Links */
+a{
+    color:var(--link);
+    text-decoration:none;
+    transition:all .2s
+}
+
+a:hover{
+    color:#93c5fd;
+    text-decoration:underline
+}
+
+/* ➪ Linha Separadora */
+.linha{
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--destaque),transparent);
+    margin:40px 0
+}
+
+/* ➪ Cards */
+.card{
+    background:linear-gradient(145deg,var(--card),#0a0a0a);
+    border:1px solid var(--borda);
+    border-radius:12px;
+    padding:25px;
+    margin:25px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.5);
+    transition:transform .3s
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    border-color:var(--destaque)
+}
+
+/* ➪ Card de Linguagem (destaque visual) */
+.linguagem-card{
+    border-left:4px solid var(--destaque);
+    background:linear-gradient(145deg,#121212,#080808)
+}
+
+.linguagem-cabecalho{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px
+}
+
+.linguagem-ano{
+    color:var(--aviso);
+    font-weight:700;
+    font-size:1.1rem
+}
+
+/* ➪ Tags de Status */
+.tag{
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:.85rem;
+    margin:5px 8px 5px 0;
+    font-weight:600
+}
+
+.tag-lts{background:#1e3a5f;color:#93c5fd}
+.tag-current{background:#3b1f5f;color:#d8b4fe}
+.tag-fork{background:#442222;color:#fca5a5}
+.tag-novo{background:#1f4433;color:#86efac}
+.tag-obsoleto{background:#3f2323;color:#fca5a5}
+.tag-oficial{background:#1a3a2f;color:#6ee7b7}
+
+/* ➪ Código Inline */
+code{
+    background:#1a1a1a;
+    padding:3px 10px;
+    border-radius:5px;
+    color:#90ee90;
+    font-family:'Courier New',monospace;
+    font-weight:bold
+}
+
+/* ➪ Blocos de Código */
+pre{
+    background:var(--codigo);
+    border:1px solid #2a3a4a;
+    border-radius:10px;
+    padding:20px;
+    overflow-x:auto;
+    margin:20px 0;
+    box-shadow:inset 0 0 20px rgba(0,0,0,.5)
+}
+
+pre code{
+    background:transparent;
+    padding:0;
+    color:#a5f3fc;
+    line-height:1.6
+}
+
+/* ➪ Caixas de Destaque */
+.destaque{
+    background:rgba(212,175,55,.1);
+    border-left:4px solid var(--destaque);
+    padding:15px 20px;
+    margin:20px 0;
+    border-radius:0 8px 8px 0
+}
+
+.aviso{
+    background:rgba(250,204,21,.1);
+    border-left:4px solid var(--aviso);
+    padding:15px 20px;
+    margin:20px 0;
+    border-radius:0 8px 8px 0
+}
+
+.sucesso{
+    background:rgba(74,222,128,.1);
+    border-left:4px solid var(--sucesso);
+    padding:15px 20px;
+    margin:20px 0;
+    border-radius:0 8px 8px 0
+}
+
+/* ➪ Listas */
+ul,ol{
+    margin:15px 0 15px 25px
+}
+
+li{
+    margin:10px 0
+}
+
+/* ➪ Tabelas */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+    box-shadow:0 2px 10px rgba(0,0,0,.3)
+}
+
+th,td{
+    border:1px solid var(--borda);
+    padding:14px;
+    text-align:left
+}
+
+th{
+    background:linear-gradient(180deg,#1a1a1a,#111);
+    color:var(--destaque);
+    font-weight:700
+}
+
+tr:nth-child(even){
+    background:#0a0a0a
+}
+
+tr:hover{
+    background:#151515
+}
+
+/* ➪ Tabela de Operadores */
+.tabela-operadores th:first-child,
+.tabela-operadores td:first-child{
+    width:12%;
+    text-align:center
+}
+
+.sinal{
+    display:inline-block;
+    min-width:40px;
+    text-align:center;
+    background:#1a1a1a;
+    padding:4px 8px;
+    border-radius:4px;
+    font-weight:bold;
+    color:var(--destaque);
+    margin:0 4px;
+    font-family:'Courier New',monospace
+}
+
+/* ➪ Botões de Download */
+.link-download{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:linear-gradient(135deg,var(--destaque),var(--destaque-escuro));
+    color:#000 !important;
+    padding:10px 20px;
+    border-radius:8px;
+    font-weight:700;
+    margin:8px 12px 8px 0;
+    box-shadow:0 4px 10px rgba(212,175,55,.3);
+    transition:all .3s
+}
+
+.link-download:hover{
+    transform:scale(1.05);
+    box-shadow:0 6px 15px rgba(212,175,55,.4);
+    color:#000 !important;
+    text-decoration:none
+}
+
+/* ➪ Assinatura Final */
+.assinatura{
+    text-align:center;
+    margin-top:60px;
+    padding:30px;
+    border-top:1px solid var(--linha);
+    color:var(--prata);
+    font-size:1.05rem
+}
+
+/* ➪ Responsividade para Celular */
+@media(max-width:700px){
+    body{
+        padding:12px
+    }
+    h1{
+        font-size:1.8rem
+    }
+    h2{
+        font-size:1.3rem
+    }
+    .card{
+        padding:18px
+    }
+    table{
+        font-size:.9rem
+    }
+    th,td{
+        padding:10px 8px
+    }
+    .link-download{
+        width:100%;
+        justify-content:center;
+        margin:8px 0
+    }
+    pre{
+        padding:15px;
+        font-size:.9rem
+    }
+}

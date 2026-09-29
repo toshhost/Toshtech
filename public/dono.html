@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOSH TECH</title>
+<link rel="stylesheet" href="/assets/temas/ToshTech/dono.css">
+</head>
+<body>
+    <div id="msg" class="alerta"></div>
+
+    <div class="container">
+        <a href="/dashboard" class="btn-voltar">
+            <svg class="icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Voltar ao Dashboard
+        </a>
+
+        <header class="cabecalho-painel">
+            <h1 class="prata">
+                <svg class="icone-titulo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                Dono Tosh Tech
+            </h1>
+            <div class="resumo-painel">
+                <div class="card-resumo">
+                    <svg class="icone-resumo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <div>
+                        <span>Total de Usuários</span>
+                        <strong id="qtdTotal">—</strong>
+                    </div>
+                </div>
+                <div class="card-resumo destaque">
+                    <svg class="icone-resumo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                        <rect x="8" y="2" width="8" height="4" rx="1"/>
+                    </svg>
+                    <div>
+                        <span>Parcerias Pendentes</span>
+                        <strong id="qtdParcerias">0</strong>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ÁREA DE PARCERIAS - ESTILO CATÁLOGO -->
+        <section id="sessaoParcerias" style="display:none;margin:32px 0">
+            <h2 class="titulo-secao">
+                <svg class="icone-secao" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Solicitações de Parceria
+            </h2>
+            <div class="grade-parcerias" id="listaParcerias"></div>
+        </section>
+
+        <!-- ÁREA DE USUÁRIOS - ESTILO CATÁLOGO -->
+        <section style="margin:32px 0">
+            <h2 class="titulo-secao">
+                <svg class="icone-secao" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20V10"/>
+                    <path d="M18 20V4"/>
+                    <path d="M6 20v-6"/>
+                </svg>
+                Lista de Usuários
+            </h2>
+            <div class="grade-usuarios" id="listaUsuarios">
+                <p class="texto-aviso">Carregando usuários...</p>
+            </div>
+        </section>
+
+        <!-- FORMULÁRIO DE EDIÇÃO -->
+        <div class="painel-formulario" id="formEditar">
+            <h3 class="titulo-form">
+                <svg class="icone-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Editar Dados do Usuário
+            </h3>
+            <input type="hidden" id="emailOriginal">
+
+            <div class="grupo-campos">
+                <div class="campo">
+                    <label>Nome Completo</label>
+                    <input type="text" id="edtNome" placeholder="Digite o nome completo">
+                </div>
+                <div class="campo">
+                    <label>E-mail de Acesso</label>
+                    <input type="email" id="edtEmail" placeholder="exemplo@dominio.com">
+                </div>
+            </div>
+
+            <div class="grupo-campos duplo">
+                <div class="campo">
+                    <label>Cargo do Usuário</label>
+                    <select id="edtCargo">
+                        <option value="dono">Dono</option>
+                        <option value="adm">Administrador</option>
+                        <option value="suporte">Suporte</option>
+                        <option value="cliente">Cliente</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label>Nível / Patente</label>
+                    <input type="text" id="edtNivel" placeholder="Ex: Bronze, Prata, Ouro">
+                </div>
+            </div>
+
+            <div class="grupo-campos duplo">
+                <div class="campo">
+                    <label>Plano Ativo</label>
+                    <input type="text" id="edtPlano" placeholder="Ex: Básico, Pro, Premium">
+                </div>
+                <div class="campo">
+                    <label>Validade do Plano</label>
+                    <input type="text" id="edtValidade" placeholder="DD/MM/AAAA ou Indeterminado">
+                </div>
+            </div>
+
+            <div class="grupo-campos duplo">
+                <div class="campo">
+                    <label>TechCoins</label>
+                    <input type="number" id="edtTechcoins" min="0" value="0">
+                </div>
+                <div class="campo">
+                    <label>Requisições Restantes</label>
+                    <input type="number" id="edtRequests" min="0" value="0">
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Chave de Acesso API</label>
+                <input type="text" id="edtChave" placeholder="Chave única do usuário">
+            </div>
+
+            <div class="botoes-form">
+                <button type="button" onclick="salvarEdicao()" class="btn-principal">
+                    <svg class="btn-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <polyline points="17,21 17,13 7,13 7,21"/>
+                        <polyline points="7,3 7,8 15,8"/>
+                    </svg>
+                    Salvar Alterações
+                </button>
+                <button type="button" onclick="confirmarExclusao()" class="btn-perigo">
+                    <svg class="btn-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3,6 5,6 21,6"/>
+                        <path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6m3,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                    </svg>
+                    Excluir Conta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/dono.js"></script>
+</body>
+</html>

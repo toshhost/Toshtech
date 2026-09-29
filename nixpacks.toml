@@ -1,0 +1,25 @@
+# ════════════════════════════════════════════════════
+# ➪ TOSH TECH — Configuração Universal Canvas (Render) ✅
+# ════════════════════════════════════════════════════
+
+[phases.setup]
+nixPkgs = [
+  'nodejs_20',
+  'pkg-config',
+  'cairo',
+  'pango',
+  'libpng',
+  'jpeg',
+  'giflib',
+  'librsvg',
+  'pixman'
+]
+
+[phases.build]
+cmds = [
+  'npm install'
+]
+
+[env]
+# Corrige a localização dos arquivos .pc gerados pelo Nix
+PKG_CONFIG_PATH = "$NIX_PROFILE/lib/pkgconfig"

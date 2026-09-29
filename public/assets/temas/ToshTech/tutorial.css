@@ -1,0 +1,186 @@
+/* ➪ Reset Universal e Fonte */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Courier New', monospace;
+    font-weight:700;
+    letter-spacing:.5px
+}
+
+/* ➪ Corpo da Página */
+body{
+    background:#000;
+    color:#c5c5c5;
+    min-height:100vh;
+    padding:20px 12px
+}
+
+/* ➪ Container Central */
+.container{
+    max-width:700px;
+    margin:0 auto
+}
+
+/* ➪ Botão de Voltar — Prata, Pequeno, Canto Superior Esquerdo */
+.botao-voltar{
+    position:fixed;
+    top:20px;
+    left:20px;
+    padding:8px 14px;
+    background:transparent;
+    border:1px solid #c5c5c5;
+    color:#c5c5c5;
+    font-size:.8rem;
+    text-transform:uppercase;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s ease;
+    z-index:999
+}
+.botao-voltar:hover{
+    background:#c5c5c5;
+    color:#000;
+    box-shadow:0 0 10px rgba(197,197,197,.4)
+}
+
+/* ➪ Cabeçalho Principal */
+.cabecalho{
+    text-align:center;
+    margin-bottom:30px;
+    padding-bottom:15px;
+    border-bottom:1px solid #333;
+    margin-top:45px
+}
+.logo{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    margin-bottom:12px;
+    border:2px solid #c5c5c5;
+    box-shadow:0 0 12px rgba(192,192,192,.25)
+}
+h1{
+    font-size:1.6rem;
+    color:#c5c5c5;
+    margin-bottom:4px;
+    text-transform:uppercase;
+    text-shadow:0 0 10px rgba(197,197,197,.4)
+}
+.subtitulo{
+    font-size:.85rem;
+    color:#888
+}
+
+/* ➪ Seção de Conteúdo — Card Escuro com Borda */
+.secao-video{
+    margin-bottom:30px;
+    background:#0a0a0a;
+    border-radius:8px;
+    padding:15px;
+    border:1px solid #222;
+    box-shadow:0 2px 10px rgba(0,0,0,.4)
+}
+
+/* ➪ Legenda da Seção — Com Ícone SVG e Linha Lateral */
+.legenda{
+    font-size:.9rem;
+    line-height:1.8;
+    color:#c5c5c5;
+    margin-bottom:15px;
+    padding-left:12px;
+    border-left:2px solid #c5c5c5;
+    text-transform:uppercase;
+    font-weight:500
+}
+
+/* ➪ Ícone SVG Padrão */
+.icone-svg{
+    width:16px;
+    height:16px;
+    vertical-align:middle;
+    margin-right:8px;
+    fill:#c5c5c5
+}
+
+/* ➪ Destaque de Texto — Ex: "SuaApiKey" */
+.destaque-codigo{
+    display:inline-block;
+    background:#1a1a1a;
+    color:#ffd700;
+    padding:2px 10px;
+    border-radius:4px;
+    font-family:'Courier New',monospace;
+    font-weight:bold;
+    margin:0 4px;
+    border:1px solid #444
+}
+
+/* ➪ Caixa de Aviso — Alerta/Importante */
+.aviso{
+    color:#ff9999;
+    margin:12px 0;
+    padding-left:24px;
+    position:relative;
+    line-height:1.6
+}
+.aviso svg{
+    position:absolute;
+    left:0;
+    top:2px;
+    fill:#ff9999;
+    width:16px;
+    height:16px
+}
+
+/* ➪ Caixa de Sucesso — Confirmação */
+.sucesso{
+    color:#90ee90;
+    margin:12px 0;
+    padding-left:24px;
+    position:relative;
+    line-height:1.6
+}
+.sucesso svg{
+    position:absolute;
+    left:0;
+    top:2px;
+    fill:#90ee90;
+    width:16px;
+    height:16px
+}
+
+/* ➪ Player de Vídeo */
+.video-player{
+    width:100%;
+    border-radius:6px;
+    border:1px solid #333;
+    background:#000;
+    outline:none;
+    margin-top:10px
+}
+
+/* ➪ Imagem de Tutorial */
+.img-tutorial{
+    width:100%;
+    border-radius:6px;
+    border:1px solid #333;
+    background:#000;
+    display:block;
+    margin-top:10px
+}
+
+/* ➪ Rodapé */
+.rodape{
+    text-align:center;
+    margin-top:40px;
+    padding-top:15px;
+    border-top:1px solid #333;
+    color:#666;
+    font-size:.8rem
+}
+.destaque{
+    color:#c5c5c5;
+    font-weight:700;
+    text-transform:uppercase
+}

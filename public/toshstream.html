@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOSHSTREAM</title>
+
+<!-- ═══════ PWA — INSTALAR COMO APP ═══════ -->
+<!-- ✅ ORDEM CORRETA: manifesto PRIMEIRO, depois metatags -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ToshStream">
+<meta name="description" content="ToshStream — Reproduza e baixe vídeos diretamente">
+
+<!-- Ícones do App -->
+<link rel="apple-touch-icon" href="/toshstream">
+<link rel="icon" type="image/jpeg" href="/toshstream">
+
+<!-- ═══════ ESTILOS ═══════ -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/temas/ToshTech/toshstream.css">
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="logo" onclick="abrirLogo()"></div>
+    <h1 class="nome-app">TOSHSTREAM</h1>
+  </div>
+  <button id="btnInstalar" class="btn-instalar" style="display:none">
+    <i class="fas fa-download"></i> Instalar App
+  </button>
+  <div class="caixa-pesquisa">
+    <input id="campoBusca" type="text" placeholder="Digite sua pesquisa...">
+    <button onclick="buscarVideo()"><i class="fas fa-search"></i> Buscar</button>
+  </div>
+</header>
+
+<div class="area-player" id="areaPlayer"></div>
+
+<div class="area-historico">
+  <div class="cabecalho-historico">
+    <i class="fas fa-clock-rotate-left" style="color:var(--prata-claro);font-size:18px"></i>
+    <h5>Histórico de Visualizações</h5>
+  </div>
+  <div id="listaHistorico"></div>
+</div>
+
+<div class="barra-desfazer" id="barraDesfazer">
+  <span id="textoDesfazer">Item removido</span>
+  <button onclick="desfazerExclusao()">Desfazer</button>
+</div>
+
+<div class="msg-flutuante" id="msgFlutuante"></div>
+
+<div class="rodape">TOSH TECH • TODOS OS DIREITOS RESERVADOS</div>
+
+<script src="/js/toshstream.js"></script>
+</body>
+</html>

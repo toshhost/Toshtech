@@ -1,0 +1,629 @@
+/* FONTE DOS TEXTOS */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+:root {
+  /* ROSA METÁLICO — 100% SUBSTITUI TODOS OS CINZAS */
+  --rosa-metal-claro: #ffd9f0;
+  --rosa-metal-meio: #f2b8d8;
+  --rosa-metal-padrao: #e89fc7;
+  --rosa-metal-escuro: #c85a97;
+  --rosa-metal-forte: #a03a75;
+  --rosa-metal-sombra: rgba(232, 159, 199, 0.7);
+  --fundo-card: rgba(200, 90, 151, 0.18);
+  --fundo-transparente: rgba(232, 159, 199, 0.12);
+  --borda-metal: linear-gradient(135deg, var(--rosa-metal-claro), var(--rosa-metal-padrao), var(--rosa-metal-escuro));
+  --sombra-metal: 0 0 15px var(--rosa-metal-sombra), 0 0 30px rgba(200, 90, 151, 0.4);
+  --sombra-texto: 0 0 10px rgba(255, 217, 232, 0.5);
+  --etiqueta-dono-fundo: var(--fundo-card);
+  --etiqueta-dono-texto: var(--rosa-metal-claro);
+  --etiqueta-adm: linear-gradient(135deg, #64b5f6, #42a5f5);
+  --etiqueta-suporte: linear-gradient(135deg, #ce93d8, #ab47bc);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', 'Poppins', sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+  letter-spacing: 0.4px !important;
+  color: var(--rosa-metal-padrao) !important;
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: url('./fundo.jpg') no-repeat center center fixed !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center top !important;
+}
+
+body::after, #fundoMidia {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--fundo-card) !important;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#dashboard-root {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding-top: 90px !important;
+}
+
+/* ══════════════════════════════════════════
+   🎀 CABEÇALHO — TUDO ROSA
+   ══════════════════════════════════════════ */
+.dt-cabecalho {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: var(--fundo-card) !important;
+  border-bottom: 1px solid var(--rosa-metal-padrao);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  z-index: 999;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 15px rgba(200, 90, 151, 0.2), inset 0 1px 0 var(--rosa-metal-claro);
+}
+
+.dt-titulo-cabecalho, .dt-menu-api-nome span, .dt-menu-nome {
+  color: var(--rosa-metal-claro) !important;
+  text-shadow: var(--sombra-texto);
+  font-weight: 800;
+}
+
+.dt-menu-cargo, .dt-menu-chave, .dt-busca-cabecalho input::placeholder {
+  color: var(--rosa-metal-padrao) !important;
+  opacity: 0.8;
+}
+
+.dt-icone-cabecalho, .dt-btn-busca, .dt-menu-item svg, .dt-seta-submenu {
+  color: var(--rosa-metal-padrao) !important;
+  fill: currentColor !important;
+  filter: drop-shadow(0 0 5px var(--rosa-metal-sombra));
+}
+
+.dt-notif-badge {
+  background: var(--rosa-metal-claro) !important;
+  box-shadow: 0 0 8px var(--rosa-metal-sombra);
+}
+
+/* ══════════════════════════════════════════
+   🎀 BUSCA — FUNDO ROSA IGUAL CARTÕES
+   ══════════════════════════════════════════ */
+.dt-busca-cabecalho {
+  display: flex;
+  align-items: center;
+  background: var(--fundo-card) !important;
+  border: 1px solid var(--rosa-metal-padrao);
+  border-radius: 20px;
+  padding: 6px 10px;
+  height: 32px;
+  max-width: 160px;
+  box-shadow: 0 0 10px rgba(200, 90, 151, 0.2);
+}
+
+.dt-busca-cabecalho input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rosa-metal-claro) !important;
+}
+
+/* ══════════════════════════════════════════
+   🎀 BOTÕES MENU — FUNDO ROSA IGUAL CARTÕES
+   ══════════════════════════════════════════ */
+.dt-btn-menu {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--fundo-card) !important;
+  border: 1px solid var(--rosa-metal-padrao);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 8px rgba(200, 90, 151, 0.2);
+}
+
+.dt-btn-menu:hover {
+  background: var(--fundo-transparente) !important;
+  border-color: var(--rosa-metal-claro);
+  transform: scale(1.05);
+}
+
+.dt-btn-menu .dt-ponto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rosa-metal-padrao) !important;
+  transition: .2s;
+}
+
+.dt-btn-fechar-menu {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--fundo-card) !important;
+  border: 1px solid var(--rosa-metal-padrao);
+  color: var(--rosa-metal-padrao) !important;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 8px rgba(200, 90, 151, 0.2);
+}
+
+.dt-btn-fechar-menu:hover {
+  background: var(--fundo-transparente) !important;
+  color: var(--rosa-metal-claro) !important;
+  border-color: var(--rosa-metal-claro);
+  transform: scale(1.05);
+}
+
+.dt-btn-fechar-menu svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor !important;
+}
+
+/* ══════════════════════════════════════════
+   🎀 MENU LATERAL — TUDO ROSA
+   ══════════════════════════════════════════ */
+.dt-menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  max-width: 85vw;
+  height: 100%;
+  background: var(--fundo-card) !important;
+  border-right: 1px solid var(--rosa-metal-padrao);
+  z-index: 9999;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+  overflow-y: auto;
+  padding: 60px 15px 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 3px 0 20px rgba(0,0,0,0.2), inset 1px 0 0 var(--rosa-metal-claro);
+}
+
+.dt-menu-lateral.aberto { transform: translateX(0); }
+
+.dt-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  color: var(--rosa-metal-claro) !important;
+  text-decoration: none;
+  border-radius: 8px;
+  margin: 4px 8px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: calc(100% - 16px);
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+.dt-menu-item:hover {
+  background: var(--fundo-transparente) !important;
+  color: var(--rosa-metal-padrao) !important;
+}
+
+.dt-menu-separador {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rosa-metal-padrao), transparent) !important;
+  margin: 16px 12px;
+}
+
+.dt-submenu {
+  padding-left: 20px;
+  margin: 5px 0;
+}
+
+.dt-menu-lateral::-webkit-scrollbar { width: 6px; }
+.dt-menu-lateral::-webkit-scrollbar-track { background: rgba(232, 159, 199, 0.05) !important; }
+.dt-menu-lateral::-webkit-scrollbar-thumb {
+  background: var(--borda-metal) !important;
+  border-radius: 3px;
+}
+.dt-menu-lateral::-webkit-scrollbar-thumb:hover { background: var(--rosa-metal-claro) !important; }
+
+/* ══════════════════════════════════════════
+   🎀 AVATAR — BORDA ROSA METÁLICA
+   ══════════════════════════════════════════ */
+.dt-avatar-wrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  margin: 30px auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dt-aureola, .dt-asas, .dt-asa { display: none !important; }
+
+.dt-avatar, .dt-menu-avatar {
+  position: relative;
+  z-index: 2;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: no-repeat center/cover var(--fundo-transparente);
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  box-shadow: var(--sombra-metal);
+}
+
+.dt-avatar::after, .dt-menu-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--borda-metal) !important;
+  z-index: -1;
+  animation: brilhoMetal 2.5s ease-in-out infinite;
+}
+
+@keyframes brilhoMetal {
+  0%,100% { opacity: 0.8; filter: brightness(1) saturate(1.2); }
+  50% { opacity: 1; filter: brightness(1.3) saturate(1.5); }
+}
+
+.dt-avatar-caixa {
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+.dt-avatar-caixa:hover { transform: scale(1.05); }
+
+/* ══════════════════════════════════════════
+   🎀 TEXTOS — BARRA REMOVIDA E NOME NORMAL
+   ══════════════════════════════════════════ */
+.dt-container {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dt-prata {
+  color: var(--rosa-metal-claro) !important;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-shadow: var(--sombra-texto);
+  margin: 0 0 10px;
+}
+
+/* ✅ REMOVIDA COMPLETAMENTE A BARRA QUE QUEBRAVA */
+.dt-linha-prata { display: none !important; }
+
+.dt-patente {
+  text-align: center;
+  font-size: 1.3rem;
+  color: var(--rosa-metal-padrao) !important;
+  margin: 5px 0;
+  font-weight: 700;
+  text-shadow: var(--sombra-texto);
+  background: transparent !important;
+  border: none !important;
+  line-height: 1.4;
+}
+
+.dt-info {
+  text-align: center;
+  color: var(--rosa-metal-padrao) !important;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-shadow: var(--sombra-texto);
+}
+
+.dt-mensagem, .mensagem-boasvindas {
+  background: var(--fundo-card) !important;
+  border: 1px solid var(--rosa-metal-padrao) !important;
+  border-radius: 14px;
+  padding: 22px 20px;
+  margin: 15px 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 var(--rosa-metal-claro);
+  backdrop-filter: blur(8px);
+  color: var(--rosa-metal-claro) !important;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ══════════════════════════════════════════
+   🎀 ESTRELAS — ROSA METÁLICO BEM NÍTIDO
+   ══════════════════════════════════════════ */
+.estrelas-avaliacao, .dt-estrelas {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.estrela, .dt-estrela {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--rosa-metal-padrao) !important;
+  text-shadow: 0 0 12px var(--rosa-metal-sombra);
+  position: relative;
+  display: inline-block;
+  animation: brilhoEstrela 2.5s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes brilhoEstrela {
+  0%,100% { 
+    color: var(--rosa-metal-padrao) !important;
+    filter: brightness(1) drop-shadow(0 0 8px var(--rosa-metal-sombra));
+  }
+  50% { 
+    color: var(--rosa-metal-claro) !important;
+    filter: brightness(1.4) drop-shadow(0 0 15px var(--rosa-metal-sombra));
+  }
+}
+
+/* ══════════════════════════════════════════
+   🎀 ETIQUETAS DE CARGO — ALINHADAS
+   ══════════════════════════════════════════ */
+.tipo-conta, .etiqueta-cargo, .dt-etiqueta-cargo {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin: 10px auto 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border: 1px solid var(--rosa-metal-padrao);
+  transition: all 0.3s ease;
+}
+
+.tipo-dono, .etiqueta-dono, .dt-etiqueta-dono {
+  background: var(--etiqueta-dono-fundo) !important;
+  color: var(--etiqueta-dono-texto) !important;
+  box-shadow: 0 0 12px var(--sombra-metal);
+  text-shadow: var(--sombra-texto);
+}
+
+.tipo-adm, .etiqueta-adm, .dt-etiqueta-adm {
+  background: var(--etiqueta-adm) !important;
+  color: #fff !important;
+  box-shadow: 0 0 12px rgba(100, 181, 246, 0.4);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.tipo-suporte, .etiqueta-suporte, .dt-etiqueta-suporte {
+  background: var(--etiqueta-suporte) !important;
+  color: #fff !important;
+  box-shadow: 0 0 12px rgba(206, 147, 216, 0.4);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.tipo-cliente, .etiqueta-cliente, .dt-etiqueta-cliente {
+  background: var(--fundo-card) !important;
+  color: var(--rosa-metal-padrao) !important;
+  box-shadow: 0 0 12px var(--sombra-metal);
+}
+
+/* ══════════════════════════════════════════
+   🎀 CARTÕES E BARRAS — TUDO ROSA
+   ══════════════════════════════════════════ */
+.dt-card {
+  background: var(--fundo-card) !important;
+  border: 1px solid var(--rosa-metal-padrao) !important;
+  border-radius: 14px;
+  padding: 22px 20px;
+  margin: 15px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 var(--rosa-metal-claro);
+  backdrop-filter: blur(8px);
+}
+
+.dt-card h3 {
+  margin: 0 0 18px 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--rosa-metal-claro) !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: var(--sombra-texto);
+}
+
+.dt-dados-plano {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.dt-dados-plano span:first-child {
+  color: var(--rosa-metal-padrao) !important;
+  font-weight: 700;
+}
+
+.dt-dados-plano span:last-child {
+  color: var(--rosa-metal-claro) !important;
+  font-weight: 800;
+  text-align: right;
+  max-width: 70%;
+  word-break: break-all;
+}
+
+.dt-btn-copiar-chave {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--rosa-metal-padrao) !important;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .25s ease;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.dt-btn-copiar-chave:hover {
+  color: var(--rosa-metal-claro) !important;
+  transform: scale(1.15);
+  background: var(--fundo-transparente);
+}
+
+.dt-btn-copiar-chave svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor !important;
+  display: block;
+}
+
+.dt-barra-container { margin: 18px 0 }
+.dt-barra-container>p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rosa-metal-claro) !important;
+  text-shadow: var(--sombra-texto);
+}
+
+.dt-barra-fundo {
+  width: 100%;
+  height: 12px;
+  background: rgba(160, 58, 117, 0.3) !important;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--rosa-metal-escuro);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5)
+}
+
+.dt-barra-progresso {
+  height: 100%;
+  border-radius: 6px;
+  transition: width .6s ease;
+  background: linear-gradient(90deg,
+    var(--rosa-metal-forte) 0%,
+    var(--rosa-metal-escuro) 25%,
+    var(--rosa-metal-padrao) 50%,
+    var(--rosa-metal-claro) 75%,
+    var(--rosa-metal-escuro) 100%
+  ) !important;
+  box-shadow: 0 0 15px var(--rosa-metal-sombra), inset 0 1px 2px rgba(255,255,255,0.4);
+  position: relative;
+}
+
+.dt-barra-progresso::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent) !important;
+  border-radius: 6px
+}
+
+.dt-link-parcerias {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: var(--rosa-metal-padrao) !important;
+  font-size: 13px;
+  text-decoration: underline;
+  transition: color .2s ease;
+  cursor: pointer;
+}
+
+.dt-link-parcerias:hover { color: var(--rosa-metal-claro) !important; }
+
+.dt-ranking { list-style: none; margin: 0; padding: 0 }
+.dt-ranking li {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--rosa-metal-padrao) !important;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  min-height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--rosa-metal-claro) !important;
+}
+
+.dt-ranking li:last-child { border-bottom: none }
+
+/* ══════════════════════════════════════════
+   🎀 PARTÍCULAS — ROSA METÁLICO
+   ══════════════════════════════════════════ */
+.dt-particula {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--rosa-metal-claro) !important;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--rosa-metal-sombra);
+  opacity: 0;
+  animation: dt-subirParticula 15s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes dt-subirParticula{
+  0%{transform: translateY(110vh);opacity:0}
+  15%{opacity:.8}
+  85%{opacity:.8}
+  100%{transform: translateY(-10vh);opacity:0}
+}
+
+/* ✅ RESPONSIVO */
+@media(max-width:480px){
+  .dt-cabecalho{ padding: 0 6px; gap: 4px }
+  .dt-prata{ font-size: 1.5rem }
+  .dt-patente{ font-size: 1.1rem }
+  .dt-card, .dt-mensagem{ padding: 18px 15px }
+  .dt-avatar, .dt-menu-avatar{ width: 90px; height: 90px }
+  .estrela, .dt-estrela{ font-size: 1.3rem }
+}
